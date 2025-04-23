@@ -1,6 +1,6 @@
 # Programación I
 
-16 de abril de 2025, clase 01 de Programación I
+>16 de abril de 2025, clase 01 de Programación I
 
 ## ¿Qué es un IDE?
 
@@ -14,7 +14,7 @@ Un **IDE** es un Entorno de programación estructurad que se compone de:
 
 ## Algunos comandos clave para el terminal
 
-21 de abril de 2025, clase 02 de Progrmación I
+>21 de abril de 2025, clase 02 de Progrmación I
 
 ### Algunos atajos de teclado para el Visual code
 
@@ -60,5 +60,23 @@ Ojo! Debes configurar usuario y email para poder subir tu proyecto a la nube
 - **git add *archivo.extensión***: agregar un archivo al monitoreo de GIT
 - **git status**: reporte de la situación por parte de GIT (lo que se modificó o sincronizó).
 - **git commit -m *"mensaje"***: sincronizar cambios detectados por el GIT en los documentos que monitorea.
+
+>22 de abril de 2025, clase 03 de Programación
+
+### GIT para la nuve
+
+-*git push*: para subir tu proyecto a un repositorio en la nube
+-*git pull*: para descargar código de un repositorio de la nube  
+
+### Algunas carpetas importantes en tu Workspace
+
+- **Bin**: binaries, los .exe generados despues de copilar código.
+- **Lib**: librerías o bibliotecas a utilizar en el desarrollo.
+- **Src**: donde se alojará el código base del proyecto
+- **Database**: donde se encontrarán todos los archivos relacionados a los datos.
+
+## Branchs de GIT en tu Proyecto
+
+Los diferentes puntos de control que crea GIT en tu proyecto se alojan a lo largo de una rama principal, aunque puedes crear más ramas paralelas que estrán dedicadas a desarrollar diferentes partes del proyecto. Toma en cuenta que al final del desarrollo las ramas se tendrán que unir de nuevo a la principal mediante una función "merge".
 
 ## C/C++
