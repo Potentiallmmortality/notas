@@ -14,7 +14,7 @@ Un **IDE** es un Entorno de programación estructurad que se compone de:
 
 ## Algunos comandos clave para el terminal
 
->21 de abril de 2025, clase 02 de Progrmación I
+>21 de abril de 2025, clase 02 de Programación I
 
 ### Algunos atajos de teclado para el Visual code
 
@@ -46,7 +46,7 @@ Un **IDE** es un Entorno de programación estructurad que se compone de:
 - **ping **web.com***: analiza la conexión con un sitio web.
 - **echo "hola mundo">>*archivo.extensión***: inprime un mensaje en un arhivo dado.
 
-### Comandos exclusivos del GIT
+### Algunos Comandos exclusivos del GIT
 
 Nótese que siempre empiezan con "git"
 
@@ -58,15 +58,18 @@ Ojo! Debes configurar usuario y email para poder subir tu proyecto a la nube
 
 - **git init**: iniciar el monitoreo de GIT (puntos de control) en el workspace en el que estás.
 - **git add *archivo.extensión***: agregar un archivo al monitoreo de GIT
+    **git add .** agregará todos los archivos de un directorio al trakeo de GIT
 - **git status**: reporte de la situación por parte de GIT (lo que se modificó o sincronizó).
 - **git commit -m *"mensaje"***: sincronizar cambios detectados por el GIT en los documentos que monitorea.
+- **git++ *archivo.cpp -o ejecutable.exe***: para compilar un archivo de código de C.
 
 >22 de abril de 2025, clase 03 de Programación
 
-### GIT para la nuve
+### GIT para la nube
 
--*git push*: para subir tu proyecto a un repositorio en la nube
--*git pull*: para descargar código de un repositorio de la nube  
+- *git push*: para subir tu proyecto a un repositorio en la nube.
+- *git pull*: para descargar código de un repositorio de la nube.
+- *git clone URL.com*: para clonar un repositorio de la web.  
 
 ### Algunas carpetas importantes en tu Workspace
 
@@ -74,9 +77,32 @@ Ojo! Debes configurar usuario y email para poder subir tu proyecto a la nube
 - **Lib**: librerías o bibliotecas a utilizar en el desarrollo.
 - **Src**: donde se alojará el código base del proyecto
 - **Database**: donde se encontrarán todos los archivos relacionados a los datos.
+- **Tmp**: archivos temporales o auxiliares, puede alojar un archivo *gitignore*
+- Si:  
+    *touch  directorio/ gitignore*
+
+    *echo ".formato">>gitignore*
+
+     Imprimiré un parametro en *gitignore* para hacer que git no trakee a los archivos de cierto formto, esto es util con archivos .exe,.pdf,.htlm, ya que se generan cada que se compile un código.
 
 ## Branchs de GIT en tu Proyecto
 
-Los diferentes puntos de control que crea GIT en tu proyecto se alojan a lo largo de una rama principal, aunque puedes crear más ramas paralelas que estrán dedicadas a desarrollar diferentes partes del proyecto. Toma en cuenta que al final del desarrollo las ramas se tendrán que unir de nuevo a la principal mediante una función "merge".
+Los diferentes puntos de control que crea GIT en tu proyecto se alojan a lo largo de una rama principal (tienen un id y hash asociados), aunque puedes crear más ramas paralelas que estrán dedicadas a desarrollar diferentes partes del proyecto. Toma en cuenta que al final del desarrollo las ramas se tendrán que unir de nuevo a la principal mediante una función "merge".
+
+>23 de arbril de 2025, clase 04 de Programación I
+
+### Comandos Importantes para las Branchs de GIT
+
+- *git branch*: muestra todas las ramas creadas
+- *git branch -m -nombre*: renombrar una branch
+- *git log*: listado de todos los puntos de control de tu branch
+
+    *git log --graph*: agrega un pequeño dibujo al comando de arriba.
+- **git checkout archivo.formato**: vuelve al último punto de control que haya guardado GIT.
+
+    **git checkout *hash del punto de guardado***: para volver a un punto de control específico.
+- **git tag *nombre_custom***: darle un nombre personalizados a tus commits o puntos de control (ver1 ,ver2, ver3, etc).
+- *git diff*: reporta los cambios de código dados despues de un commit
+- *git reset*:
 
 ## C/C++
