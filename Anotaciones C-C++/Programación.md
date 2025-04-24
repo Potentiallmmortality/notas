@@ -81,7 +81,7 @@ Ojo! Debes configurar usuario y email para poder subir tu proyecto a la nube
 - Si:  
     *touch  directorio/ gitignore*
 
-    *echo ".formato">>gitignore*
+    *echo "<*>.formato">>gitignore*
 
      Imprimiré un parametro en *gitignore* para hacer que git no trakee a los archivos de cierto formto, esto es util con archivos .exe,.pdf,.htlm, ya que se generan cada que se compile un código.
 
@@ -94,10 +94,10 @@ Los diferentes puntos de control que crea GIT en tu proyecto se alojan a lo larg
 ### Comandos Importantes para las Branchs de GIT
 
 - *git branch*: muestra todas las ramas creadas
-- *git branch -m -nombre*: renombrar una branch
+- *git branch -m nombre_nuevo*: renombrar una branch
 - *git log*: listado de todos los puntos de control de tu branch
 
-    *git log --graph*: agrega un pequeño dibujo al comando de arriba.
+    *git log --graph*: agrega un pequeño dibujo al comando de arriba, recuerda salir del log con *q* (quit).
 - **git checkout archivo.formato**: vuelve al último punto de control que haya guardado GIT.
 
     **git checkout *hash del punto de guardado***: para volver a un punto de control específico.
