@@ -79,7 +79,7 @@ Ojo! Debes configurar usuario y email para poder subir tu proyecto a la nube
 - **Database**: donde se encontrarán todos los archivos relacionados a los datos.
 - **Tmp**: archivos temporales o auxiliares, puede alojar un archivo *gitignore*
 - Si:  
-    *touch  directorio/ gitignore*
+    *touch  directorio/.gitignore*
 
     *echo "<*>.formato">>gitignore*
 
