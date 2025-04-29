@@ -186,5 +186,55 @@ El proceso completo de drear una rama nueva, trabajar en ella y luego unir los c
 
 -*git merge fratures*
 
--*git checkout -b freature*
+-*git branch -d freature*
 (**opcional**: esta parte borra la rama mencionada en el comando)
+
+>29 de abril de 2025, clase 06 de Programción I
+
+### Integrar código en la nube
+
+Se utiliarán los comandos *git push* y *git pull* para poder guardar tu código en la nube, tener en cuenta que los cambios realizados localmente se sincronizarán localmente con la nube una vez sean subidos a la nube.
+
+Nótese que se necesita algún método de autentificación para poder utilizarse los comandos *pull* y *push*, uno de los métodos más comunes es generar dos llaves *ssh*: pública (para la nube) y otra privada (para el équipo).
+
+Para crear las llaves *ssh*, primero se debe crear un directorio *.ssh* (oculto):
+
+    -cd ~
+    pwd: */c/users/tu_usuario*
+    mkdir .ssh
+    cd .ssh
+    pwd: */c/users/tu_usuario/.ssh*
+
+Creación de la llave *ssh*:
+
+    ssh-keygen -t ed25519 -C "github_email"
+    *ingresar directorio y archivo para la key*
+
+El comando te avisara cuáles serán tus claves privadas y públicas.
+
+Ahora solo queda inciar el *ssh agent* para agregar tu *key* personal al equipo:
+
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/*nombre_de_tu_key_privada*
+
+Y por último tienes que agregar tu *key* pública a tu cuenta de github.
+
+## Programación orientada a objetos
+
+Cuando se requiere solucionar un problema por medio de la programación, irónicamente programar es lo último que se hará en dicho proceso; Para solucionar un problema de cualquier tipo se seguirá el siguiente procedimiento:
+
+1. Encontrar un patrón.
+2. Hacer un algoritmo
+3. Convertir algoritmo en código.
+
+Dentro de la programación estructurada se trabajarán con espacios de memoria llamados *bloques*, algunos de estos bloques estrán destinados a procedimientos especiales (*Void*) y otros a guardar variables para luego regresar un resultado, estos dos tipos de bloque trabajarán con otro bloque llamado *main*.
+
+### Tipos de datos
+
+En una variable podrás guardar diferentes tipos de variables tales como:
+
+- **int**: números enteros.
+- **float**: números decimales.
+- **double**:  decimales que requieren mayor precisión (3.1416...,*e*).
+- **bool**: variables de tipo booleano (*true*,*false*).
+- **char**: caracter individual (*A*).
