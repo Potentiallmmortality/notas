@@ -219,6 +219,8 @@ Ahora solo queda inciar el *ssh agent* para agregar tu *key* personal al equipo:
 
 Y por último tienes que agregar tu *key* pública a tu cuenta de github.
 
+Ahora solo tienes que iniciar tu nube con: *git remote add origin git@github.com:user/user.git*
+
 ## Programación orientada a objetos
 
 Cuando se requiere solucionar un problema por medio de la programación, irónicamente programar es lo último que se hará en dicho proceso; Para solucionar un problema de cualquier tipo se seguirá el siguiente procedimiento:
