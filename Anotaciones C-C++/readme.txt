@@ -1,3 +1,1 @@
-Este es un repositorio de prueba que planeo subir a la nube,
-contiene algunas anotaciones clave hechas en markdown sobre el funcionamiento general de GIT y próximamente
-algo de la syntaxis de los lenguajes de programación C y C++.
+Este es un repositorio de prueba que planeo subir a la nube, contiene algunas anotaciones clave hechas en markdown sobre el funcionamiento general de GIT y próximamente algo de la syntaxis de los lenguajes de programación C y C++.
