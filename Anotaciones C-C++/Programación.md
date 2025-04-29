@@ -219,7 +219,12 @@ Ahora solo queda inciar el *ssh agent* para agregar tu *key* personal al equipo:
 
 Y por último tienes que agregar tu *key* pública a tu cuenta de github.
 
-Ahora solo tienes que iniciar tu nube con: *git remote add origin git@github.com:user/user.git*
+Ahora solo tienes que iniciar tu nube con: *git remote add origin git@github.com:user/repositorio.git*
+ojo!!! debes crear tu repositorio en GITHUB primero.
+
+No olvides comprobar la conexión con la nube con: *ssh -T git@github.com*, si dice que estas correctamente autenticado estas del otro lado!!
+
+Para tu primer push has de usar: **git push -u origin *branch***
 
 ## Programación orientada a objetos
 
