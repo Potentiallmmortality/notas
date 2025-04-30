@@ -226,6 +226,8 @@ No olvides comprobar la conexión con la nube con: *ssh -T git@github.com*, si d
 
 Para tu primer push has de usar: **git push -u origin *branch***
 
+>4 de abril de 2025, clase 07 de Programación I
+
 ## Programación orientada a objetos
 
 Cuando se requiere solucionar un problema por medio de la programación, irónicamente programar es lo último que se hará en dicho proceso; Para solucionar un problema de cualquier tipo se seguirá el siguiente procedimiento:
@@ -234,7 +236,24 @@ Cuando se requiere solucionar un problema por medio de la programación, irónic
 2. Hacer un algoritmo
 3. Convertir algoritmo en código.
 
+En otras palabras, programar implica trabajar con *algoritmia* antes de siquiera programar; por ejemplo, si quisiera hacer un programa para calcular el área de un cuadrilatero dado, sería buena idea representar su solución por medio de un algoritmo y pseudocódigo plasmados en un diagrama de flujo.
+
+![diagrama_primero](area.svg)
+
 Dentro de la programación estructurada se trabajarán con espacios de memoria llamados *bloques*, algunos de estos bloques estrán destinados a procedimientos especiales (*Void*) y otros a guardar variables para luego regresar un resultado, estos dos tipos de bloque trabajarán con otro bloque llamado *main*.
+
+![diagrama](bloques.png)
+
+Para empezar a programar:
+
+Se necesita incluir la biblioteca que alamacena las funciones básicas a utilizar, llamar al bloque main ya sea por medio de void o un *tipo de dato* y en caso de usar algun tipo de dato se debe retornar un valor que concuerde con dicho tipo de dato al final del código; 
+todo esto se hace con la finalidad de que el compilador sepa como leer el código que escribimos (*empieza a leer al identificar a main*).
+
+![Empezando](hola_mundo.png)
+
+## C/C++ (alfin)
+
+Este lenguaje es medio rarito y un tanto elemental, por lo que muchos de sus procesos resultarán algo más tediosos comparados con otros lenguajes con syntaxis más simples; por ejemplo, en python o mathlab no se tienen que especificar un tipo de dato cuando se requiere declarar una variable, en C o C++ si, y hablando de tipos de datos/variables... 
 
 ### Tipos de datos
 
@@ -245,3 +264,30 @@ En una variable podrás guardar diferentes tipos de variables tales como:
 - **double**:  decimales que requieren mayor precisión (3.1416...,*e*).
 - **bool**: variables de tipo booleano (*true*,*false*).
 - **char**: caracter individual (*A*).
+
+Estos son los tipos de datos más básicos que pueden haber en C/C++, desde luego hay más tipos de datos pero derivados de los anteriores.
+
+### Problemas
+
+Haga un programa que pueda calcular el área y perimetro de un rectangulo en base a los datos proporcionados por el usuario.
+
+-Recordamos el algoritmo que representamos más arriba, para el cual necesitamos *imprimir* un mensaje al usuario y utilizar una función *input* para que el usuario pueda introducir los datos del problema, posteriormente se procederá al cálculo y se *imprimirá* el resultado:
+
+De tal forma que se utilizarán las funciones: *printf ("")* y *scanf("%tip_dato",&variable)* contenidas en la libreria: *"stdio.h"*
+
+- Empezamos por llamar a la librería: *#include "stdio.h"*
+- Llamamos a main:                    *int main ()*
+- Abrimos llaves y declaramos las variables necesarias: *{ float base=0; float altura=0; float area=0;float perimetro=0;* 
+- Las variables valdrán 0 en un inicio aunque se les asignará un valor más tarde, no olvides especificar que tipo de dato se guardará en una variable.
+- Mostramos los mensajes necesarios: *printf ("ingresa base")*; *printf ("ingresa altura")*; *printf ("el area es")*; *printf ("el perimetro es")*.
+- Escribimos los inputs: *scanf ("%f", &base)*; *sacnf ("%f", &altura)*.
+- Nótece que la incial al lado del porcentaje corresponde al tipo de dato en el que se quiere guardar el input.
+- El cálculo: *area= base x altura*; *perimetro= 2 x (altura+base)*
+- Como no usamos un void tenemos que retornar un valor: *return 0;*
+- Cerramos llaves: *}*
+
+Realizamos el proceso tal que:
+
+![codigo](cod.png)
+
+- El \n al final de cada print supone que el texto impreso se salte una linea entre prints.
