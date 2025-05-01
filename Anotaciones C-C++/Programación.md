@@ -297,18 +297,33 @@ Realizamos el proceso tal que:
 - El \n al final de cada print supone que el texto impreso se salte una linea entre prints.
 
     #include "stdio.h"
+
     int main(){
+
     float area=0;
+
     float perimetro=0;
+
     float base=0;
+
     float altura=0;
+
     printf ("ingresar base:\n")
+
     scanf ("%f", &base)
+
     printf ("ingresar altura:\n")
+
     scanf ("%f", &altura)
+
     area = base * altura
+
     perimetro = 2 * (base * altura)
+
     printf ("el area es:%f\n",area)
+
     printf ("el perimetro es:%f\n",perimetro)
+
     return 0;
+
     }
