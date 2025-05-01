@@ -199,7 +199,7 @@ Nótese que se necesita algún método de autentificación para poder utilizarse
 
 Para crear las llaves *ssh*, primero se debe crear un directorio *.ssh* (oculto):
 
-    -cd ~
+    cd ~
     pwd: */c/users/tu_usuario*
     mkdir .ssh
     cd .ssh
@@ -222,7 +222,11 @@ Y por último tienes que agregar tu *key* pública a tu cuenta de github.
 Ahora solo tienes que iniciar tu nube con: *git remote add origin git@github.com:user/repositorio.git*
 ojo!!! debes crear tu repositorio en GITHUB primero.
 
+    git remote add origin git@github.com:user/repositorio.git
+
 No olvides comprobar la conexión con la nube con: *ssh -T git@github.com*, si dice que estas correctamente autenticado estas del otro lado!!
+
+    ssh -T git@github.com
 
 Para tu primer push has de usar: **git push -u origin *branch***
 
@@ -253,7 +257,7 @@ todo esto se hace con la finalidad de que el compilador sepa como leer el códig
 
 ## C/C++ (alfin)
 
-Este lenguaje es medio rarito y un tanto elemental, por lo que muchos de sus procesos resultarán algo más tediosos comparados con otros lenguajes con syntaxis más simples; por ejemplo, en python o mathlab no se tienen que especificar un tipo de dato cuando se requiere declarar una variable, en C o C++ si, y hablando de tipos de datos/variables... 
+Este lenguaje es medio rarito y un tanto elemental, por lo que muchos de sus procesos resultarán algo más tediosos comparados con otros lenguajes con syntaxis más simples; por ejemplo, en python o mathlab no se tienen que especificar un tipo de dato cuando se requiere declarar una variable, en C o C++ si, y hablando de tipos de datos/variables...
 
 ### Tipos de datos
 
@@ -291,3 +295,20 @@ Realizamos el proceso tal que:
 ![codigo](cod.png)
 
 - El \n al final de cada print supone que el texto impreso se salte una linea entre prints.
+
+    #include "stdio.h"
+    int main(){
+    float area=0;
+    float perimetro=0;
+    float base=0;
+    float altura=0;
+    printf ("ingresar base:\n")
+    scanf ("%f", &base)
+    printf ("ingresar altura:\n")
+    scanf ("%f", &altura)
+    area = base * altura
+    perimetro = 2 * (base * altura)
+    printf ("el area es:%f\n",area)
+    printf ("el perimetro es:%f\n",perimetro)
+    return 0;
+    }
