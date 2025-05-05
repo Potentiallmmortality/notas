@@ -242,7 +242,7 @@ Cuando se requiere solucionar un problema por medio de la programación, irónic
 
 En otras palabras, programar implica trabajar con *algoritmia* antes de siquiera programar; por ejemplo, si quisiera hacer un programa para calcular el área de un cuadrilatero dado, sería buena idea representar su solución por medio de un algoritmo y pseudocódigo plasmados en un diagrama de flujo.
 
-![diagrama_primero](area.svg)
+![diagrama_primero](area.png)
 
 Dentro de la programación estructurada se trabajarán con espacios de memoria llamados *bloques*, algunos de estos bloques estrán destinados a procedimientos especiales (*Void*) y otros a guardar variables para luego regresar un resultado, estos dos tipos de bloque trabajarán con otro bloque llamado *main*.
 
@@ -255,7 +255,7 @@ todo esto se hace con la finalidad de que el compilador sepa como leer el códig
 
 ![Empezando](hola_mundo.png)
 
-## C/C++ (alfin)
+## C/C++
 
 Este lenguaje es medio rarito y un tanto elemental, por lo que muchos de sus procesos resultarán algo más tediosos comparados con otros lenguajes con syntaxis más simples; por ejemplo, en python o mathlab no se tienen que especificar un tipo de dato cuando se requiere declarar una variable, en C o C++ si, y hablando de tipos de datos/variables...
 
@@ -326,4 +326,6 @@ Realizamos el proceso tal que:
         return 0;
 
         }
+
+>5 de mayo de 2025, clase 08 de Programación I.
 
