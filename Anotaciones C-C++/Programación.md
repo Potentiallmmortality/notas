@@ -273,6 +273,8 @@ Estos son los tipos de datos más básicos que pueden haber en C/C++, desde lueg
 
 ### Problemas
 
+#### Ejercicio 1
+
 Haga un programa que pueda calcular el área y perimetro de un rectangulo en base a los datos proporcionados por el usuario.
 
 -Recordamos el algoritmo que representamos más arriba, para el cual necesitamos *imprimir* un mensaje al usuario y utilizar una función *input* para que el usuario pueda introducir los datos del problema, posteriormente se procederá al cálculo y se *imprimirá* el resultado:
@@ -329,3 +331,21 @@ Realizamos el proceso tal que:
 
 >5 de mayo de 2025, clase 08 de Programación I.
 
+
+>6 de mayo de 2025, clase 09 de Programación I.
+
+#### Refactorizar tu código
+
+Dentro de la programación, el refactorizar es un proceso de mejorar el código existente sin cambiar su comportamiento, de tal manera que nuestro programa sea más facil de entender.
+
+Para entender mejor este concepto partimos de:
+
+![hw](hw.png) 
+
+Podemos extraer la función "*printf*" por medio del atajo *Ctrl + Shift + R* y nombrarla como queramos aunque es preferible que el nombre sea un verbo en infintivo que describa la función al guardar:
+
+![guardar_función](gf.png)
+
+Al hacer este proceso tambien he creado un archivo .c que tendrá el nombre de mi archivo .cpp y que contendrá la función o las funciones que refactorizaré a futuro dentro de mi archivo .cpp, por lo que se tendrá que llamar a esa biblioteca para usar la función guardada.
+
+Nótese que en mi bloque principal la función "*printf*" se convirtió en "*saludar()*" y al terminar el bloque saludar empieza otro bloque que define a que refiere la función "*saludar()*"
