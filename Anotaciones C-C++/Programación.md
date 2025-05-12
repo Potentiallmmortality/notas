@@ -362,12 +362,43 @@ Cuando se habla de *arrays* se refiere a una colección de variables de un mismo
 
 Por ejemplo, si quieres guardar la edad de 6 personas en una variable.
 
-La forma de declarar una fila es: *tipo_dato* *nombre* *[n]* = *{0,1,2,....}* , donde n es el número de datos en la fila (debes ingresar los datos dentro de las llaves). Ojo!, los elentos se enmuran desde 0.
+La forma de declarar una fila es: *tipo_dato* *nombre* *[i]* = *{0,1,2,....i}* , donde *i* es el número de datos en la fila (debes ingresar los datos dentro de las llaves). Ojo!, los elementos de la fila se enumeran desde 0.
 
 Tal que:
 
 ![arreglos](array1.png)
 
 Tambien puedo modificar los valores de los diferentes elementos de la fila de la siguiente manera:
-*nombre* *[]* = *valor*
+*nombre* *[i]* = *valor_iésima_fila*
 
+![array_modificado](mod_elem.png)
+
+Nótese que toda la fila de datos tiene asignada un nombre de variable (*edades* en este caso) y que tambien puedo referirme a cada elemento de la fila de datos por separado con el nombre del arreglo y su identificador "*[i]*", de tal manera que puedo escribir:
+
+        printf ("%d\n", array[i])
+por ejemplo
+
+O puedo tambien utilizar un bucle para imprimir los elementos de la fila de datos:
+
+        for (size_t i = 0; i < 5; i++)
+    {
+        printf ("ingrese el valor para el elemento\n");
+        scanf("%d",&arreglo[i]);
+    }
+    for (size_t i = 0; i < 5; i++)
+    {
+        printf("%d\n",arreglo[i]);
+    }
+
+y hablando de bucles....
+
+### Bucles
+
+La estructura clave para inciar un bucle es:
+
+        for (data_type i = 0; i < n; i++)
+        {
+        //Poner una función
+        }
+
+Un bucle es un procedimiento encargado de repetir una serie de instrucciones en cierto intervalo de valores para i; donde i es un número entero en el que se comienza y n en el que el bucle finaliza, lo que lo hace especialmente útil a la hora de trabajar con un arreglo debido a que se requiere trabajar de la manera más abreviada posible con los múltiples elementos que puede tener un fila de datos.
