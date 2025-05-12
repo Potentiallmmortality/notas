@@ -271,7 +271,7 @@ En una variable podrás guardar diferentes tipos de variables tales como:
 
 Estos son los tipos de datos más básicos que pueden haber en C/C++, desde luego hay más tipos de datos pero derivados de los anteriores.
 
-### Problemas
+### Problemas Básicos
 
 #### Ejercicio 1
 
@@ -297,6 +297,7 @@ Realizamos el proceso tal que:
 ![codigo](cod.png)
 
 - El \n al final de cada print supone que el texto impreso se salte una linea entre prints.
+- Si quiero limitar el número de decimales que se mostrarán en la impresión, puedo utilizar la expresión *.n* despues del "*%*", donde *n* es el número de cifras decimales que quiero mostar en la respuesta
 
         #include "stdio.h"
 
@@ -321,9 +322,9 @@ Realizamos el proceso tal que:
 
         perimetro = 2 * (base * altura)
 
-        printf ("el area es:%f\n",area)
+        printf ("el area es:%.2f\n",area)
 
-        printf ("el perimetro es:%f\n",perimetro)
+        printf ("el perimetro es:%.2f\n",perimetro)
 
         return 0;
 
@@ -331,10 +332,9 @@ Realizamos el proceso tal que:
 
 >5 de mayo de 2025, clase 08 de Programación I.
 
-
 >6 de mayo de 2025, clase 09 de Programación I.
 
-#### Refactorizar tu código
+### Refactorizar tu código
 
 Dentro de la programación, el refactorizar es un proceso de mejorar el código existente sin cambiar su comportamiento, de tal manera que nuestro programa sea más facil de entender.
 
@@ -348,4 +348,26 @@ Podemos extraer la función "*printf*" por medio del atajo *Ctrl + Shift + R* y 
 
 Al hacer este proceso tambien he creado un archivo .c que tendrá el nombre de mi archivo .cpp y que contendrá la función o las funciones que refactorizaré a futuro dentro de mi archivo .cpp, por lo que se tendrá que llamar a esa biblioteca para usar la función guardada.
 
-Nótese que en mi bloque principal la función "*printf*" se convirtió en "*saludar()*" y al terminar el bloque saludar empieza otro bloque que define a que refiere la función "*saludar()*"
+Nótese que en mi bloque principal la función "*printf*" se convirtió en "*saludar()*" y al terminar el bloque saludar empieza otro bloque que define a que refiere la función "*saludar()*". Con esto se espera resumir un pedazo de código recurrente bajo un "*nombre clave*" a costa de tener que definir que significa ese nombre clave dentro del código del proyecto.
+
+-Advertencia: toda variable guardada dentro de una función o procedimiento refactorizado funcionará a nivel local, es decir, solo valdrá dentro de la función o procedimiento "*guardado*". Si quieres guardar una variable de manera global, lo tendras que hacer en el bloque principal.
+
+>07 de mayo de 2025, clase 10 de Programación I
+
+>12 de mayo de 2025 , clase 11 de Programación I
+
+### Arreglos (*Arrays*)
+
+Cuando se habla de *arrays* se refiere a una colección de variables de un mismo tipo de dato que se almacenan en memoria, en pocas palabras, se habla de vectores y matrices que almacenan variables.
+
+Por ejemplo, si quieres guardar la edad de 6 personas en una variable.
+
+La forma de declarar una fila es: *tipo_dato* *nombre* *[n]* = *{0,1,2,....}* , donde n es el número de datos en la fila (debes ingresar los datos dentro de las llaves). Ojo!, los elentos se enmuran desde 0.
+
+Tal que:
+
+![arreglos](array1.png)
+
+Tambien puedo modificar los valores de los diferentes elementos de la fila de la siguiente manera:
+*nombre* *[]* = *valor*
+
