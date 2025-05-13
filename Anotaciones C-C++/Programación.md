@@ -34,6 +34,7 @@ Un **IDE** es un Entorno de programación estructurad que se compone de:
 
 - **pdw**: muestra a que directorio está asociada la terminal
 - **ls**: muestra los archivos de un directorio.
+- **..\lib\archivo**: navegar por un directorio.
 - **cd..**: la terminal se mueve un directorio más arriba.
 - **touch *archivo.extensión*** , o en su defecto **touch directorio/*archivo.extensión*** para crear archivos.
 - **ls** o **cat** o **code** ***archivo.extensión*** *(si hace falta, poner directorio antes del archivo)* para leer un archivo.
@@ -392,9 +393,13 @@ O puedo tambien utilizar un bucle para imprimir los elementos de la fila de dato
 
 y hablando de bucles....
 
+>13 de mayo de 2025, clase 12 de Programación I
+
 ### Bucles
 
 La estructura clave para inciar un bucle es:
+
+**for (inicio, condicion, incremento)**
 
         for (data_type i = 0; i < n; i++)
         {
@@ -402,3 +407,19 @@ La estructura clave para inciar un bucle es:
         }
 
 Un bucle es un procedimiento encargado de repetir una serie de instrucciones en cierto intervalo de valores para i; donde i es un número entero en el que se comienza y n en el que el bucle finaliza, lo que lo hace especialmente útil a la hora de trabajar con un arreglo debido a que se requiere trabajar de la manera más abreviada posible con los múltiples elementos que puede tener un fila de datos.
+
+En este caso, el i++ significa que el valor de i aumenta en 1 en cada iteración del bucle de tal manera que i=1+i; aunque tambien puedo asignarle más condiciones a mi bucle, como por ejemplo: i=2+i, y lo podría combinar con un printf para imprimir números pares en consola cuantas veces lo diga *n*.
+
+Un bucle tambien se puede dar mediante las palabras clave *while* y *do while* tal que:
+
+while *condición*
+    //alguna instrucción, *incremento*;:
+
+do
+{
+    //alguna instrucción, *condición*;:
+}
+while *incremento*: //i<final
+
+**Advertencia:**Es recomendable que los valores de *i* y *n* sean variables, no asignarles valor directamente.
+
