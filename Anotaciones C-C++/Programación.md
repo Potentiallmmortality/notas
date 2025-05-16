@@ -34,7 +34,7 @@ Un **IDE** es un Entorno de programación estructurad que se compone de:
 
 - **pdw**: muestra a que directorio está asociada la terminal
 - **ls**: muestra los archivos de un directorio.
-- **..\lib\archivo**: navegar por un directorio.
+- **..\directorio\archivo**: navegar por un directorio.
 - **cd..**: la terminal se mueve un directorio más arriba.
 - **touch *archivo.extensión*** , o en su defecto **touch directorio/*archivo.extensión*** para crear archivos.
 - **ls** o **cat** o **code** ***archivo.extensión*** *(si hace falta, poner directorio antes del archivo)* para leer un archivo.
@@ -243,18 +243,18 @@ Cuando se requiere solucionar un problema por medio de la programación, irónic
 
 En otras palabras, programar implica trabajar con *algoritmia* antes de siquiera programar; por ejemplo, si quisiera hacer un programa para calcular el área de un cuadrilatero dado, sería buena idea representar su solución por medio de un algoritmo y pseudocódigo plasmados en un diagrama de flujo.
 
-![diagrama_primero](area.png)
+![diagrama_primero](img/area.png)
 
 Dentro de la programación estructurada se trabajarán con espacios de memoria llamados *bloques*, algunos de estos bloques estrán destinados a procedimientos especiales (*Void*) y otros a guardar variables para luego regresar un resultado, estos dos tipos de bloque trabajarán con otro bloque llamado *main*.
 
-![diagrama](bloques.png)
+![diagrama](img/bloques.png)
 
 Para empezar a programar:
 
 Se necesita incluir la biblioteca que alamacena las funciones básicas a utilizar, llamar al bloque main ya sea por medio de void o un *tipo de dato* y en caso de usar algun tipo de dato se debe retornar un valor que concuerde con dicho tipo de dato al final del código; 
 todo esto se hace con la finalidad de que el compilador sepa como leer el código que escribimos (*empieza a leer al identificar a main*).
 
-![Empezando](hola_mundo.png)
+![Empezando](img/hola_mundo.png)
 
 ## C/C++
 
@@ -295,7 +295,7 @@ De tal forma que se utilizarán las funciones: *printf ("")* y *scanf("%tip_dato
 
 Realizamos el proceso tal que:
 
-![codigo](cod.png)
+![codigo](img/cod.png)
 
 - El \n al final de cada print supone que el texto impreso se salte una linea entre prints.
 - Si quiero limitar el número de decimales que se mostrarán en la impresión, puedo utilizar la expresión *.n* despues del "*%*", donde *n* es el número de cifras decimales que quiero mostar en la respuesta
@@ -341,11 +341,11 @@ Dentro de la programación, el refactorizar es un proceso de mejorar el código 
 
 Para entender mejor este concepto partimos de:
 
-![hw](hw.png) 
+![hw](img/hw.png) 
 
 Podemos extraer la función "*printf*" por medio del atajo *Ctrl + Shift + R* y nombrarla como queramos aunque es preferible que el nombre sea un verbo en infintivo que describa la función al guardar:
 
-![guardar_función](gf.png)
+![guardar_función](img/gf.png)
 
 Al hacer este proceso tambien he creado un archivo .c que tendrá el nombre de mi archivo .cpp y que contendrá la función o las funciones que refactorizaré a futuro dentro de mi archivo .cpp, por lo que se tendrá que llamar a esa biblioteca para usar la función guardada.
 
@@ -367,12 +367,12 @@ La forma de declarar una fila es: *tipo_dato* *nombre* *[i]* = *{0,1,2,....i}* ,
 
 Tal que:
 
-![arreglos](array1.png)
+![arreglos](img/array1.png)
 
 Tambien puedo modificar los valores de los diferentes elementos de la fila de la siguiente manera:
 *nombre* *[i]* = *valor_iésima_fila*
 
-![array_modificado](mod_elem.png)
+![array_modificado](img/mod_elem.png)
 
 Nótese que toda la fila de datos tiene asignada un nombre de variable (*edades* en este caso) y que tambien puedo referirme a cada elemento de la fila de datos por separado con el nombre del arreglo y su identificador "*[i]*", de tal manera que puedo escribir:
 
@@ -417,9 +417,65 @@ while *condición*
 
 do
 {
-    //alguna instrucción, *condición*;:
+    //alguna instrucción, *incremento*;:
 }
-while *incremento*: //i<final
+while *condición*: //i<final
 
-**Advertencia:**Es recomendable que los valores de *i* y *n* sean variables, no asignarles valor directamente.
+**Advertencia:** Es recomendable que los valores de *i* y *n* sean variables, no asignarles valor directamente.
+
+>14 de mayo de 2025, clase 13 de Programación I.
+
+### Series
+
+#### Ejercicios
+
+1. Imprima "*+*" en la consola 6 veces utilizando un bucle.
+
+**Con la primera estructura**
+
+![Ejercicio1](img/e1f1.png)
+
+**Con una extuctura alternativa**
+
+![Ejercicio 1](img/e1f2.png)
+
+**Resultado:**
+
+➕	➕	➕	➕	➕	➕
+
+2. Haga una serie de 10 elementos que alterne entre "*+*" y "*-*" empezando por "*+*".
+
+Analicemos primero a que número de la serie le corresponde cada caracter:
+
+    1 2 3 4 5 
+    +  -  +  -  + 
+
+Podemos notar que si empezamos por "*+*", a cada "*+*" le corresponde el número impar y a cada "*-*" le corresponde el número par, por lo que debemos:
+
+- Definir "*+*" y "*-*" en términos de variables (*char*).
+- **Distinguir entre números pares e impares**.- Sabemos que todo número par es divisible para 2, por lo que su residuo al dividirlo entre 2 es 0, y para todo número impar su residuo será diferente de 0, tal que: i %2=0 si es par y i %2=0 si es impar, donde "*%*" indica el residuo de la división entre "*i*" y "*2*".
+- **Usar un condicional para alternar entre "*+*" y "*-*"**.- Para iniciar un condicional se utiliza la palabra clave *if* para establecer una condición a cumplir, si se cumple la condición indicar una instrucción y si no se cumple dicha condición indicar otra instrucción mediante la palabra clave *else*.
+
+**Con la primera estructura:**
+
+![ejercicio](img/e2f1.png)
+
+**Con una estructura alternativa:**
+
+![Ejercicio 2](img/e2f2.png)    
+
+**Resultado:**
+
+➕	➖	➕	➖	➕	➖	➕	➖	➕ ➖
+
+3. Imprima una serie de Fibonacci en la consola, el número de elementos que tendrá la sucesión será definida por el usuario.
+
+- **Definir la serie de Fibonacci:**- La serie de Fibonacci es una secuencia de números en la que cada número es la suma de los dos números anteriores; podemos empezar defiiendo en variables los primeros números de la serie tal que uno sea el sucesivo del otro, en este caso podemos definir un *a=0* y un *b=1*, la idea es que a adquiera el valor de *b* y que *b* adquiera el valor de *a+b*, pero este *a+b* debe contener los valores "originales de "*a*" y "*b*" antes de que "actualicen" tal que necesitamos definir una variable c que contenga el valor de "*a+b*" antes de actualizar "*a*" y "*b*"; el elemento que se tendrá que imprimir en consola será el valor de "*a*".
+- **Introducir instrucción dentro del bucle**.- es necesario introducir nuestra función "*printf ("%d",a)*" dentro de un bucle para que *printf* se repita tantas veces queramos.
+- **Usar un "input" para definir el número de elementos**.- se tendrá que declarar una variable que contenga el valor que el usuario introduzca en la consola y que al mismo tiempo hará de condición en nuestro bucle *(i<n)*.
+
+**Resolución**
+![Ejercicio 3](img/e3p1.png)
+
+![Ejercicio 3](img/e3p2.png)
 
