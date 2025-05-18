@@ -300,37 +300,6 @@ Realizamos el proceso tal que:
 - El \n al final de cada print supone que el texto impreso se salte una linea entre prints.
 - Si quiero limitar el número de decimales que se mostrarán en la impresión, puedo utilizar la expresión *.n* despues del "*%*", donde *n* es el número de cifras decimales que quiero mostar en la respuesta
 
-        #include "stdio.h"
-
-        int main(){
-        float area=0;
-
-        float perimetro=0;
-
-        float base=0;
-
-        float altura=0;
-
-        printf ("ingresar base:\n")
-
-        scanf ("%f", &base)
-
-        printf ("ingresar altura:\n")
-
-        scanf ("%f", &altura)
-
-        area = base * altura
-
-        perimetro = 2 * (base * altura)
-
-        printf ("el area es:%.2f\n",area)
-
-        printf ("el perimetro es:%.2f\n",perimetro)
-
-        return 0;
-
-        }
-
 >5 de mayo de 2025, clase 08 de Programación I.
 
 >6 de mayo de 2025, clase 09 de Programación I.
@@ -447,7 +416,7 @@ while *condición*: //i<final
 
 Analicemos primero a que número de la serie le corresponde cada caracter:
 
-    1 2 3 4 5 
+    1  2  3  4  5 
     +  -  +  -  + 
 
 Podemos notar que si empezamos por "*+*", a cada "*+*" le corresponde el número impar y a cada "*-*" le corresponde el número par, por lo que debemos:
@@ -470,8 +439,8 @@ Podemos notar que si empezamos por "*+*", a cada "*+*" le corresponde el número
 
 3. Imprima una serie de Fibonacci en la consola, el número de elementos que tendrá la sucesión será definida por el usuario.
 
-- **Definir la serie de Fibonacci:**- La serie de Fibonacci es una secuencia de números en la que cada número es la suma de los dos números anteriores; podemos empezar defiiendo en variables los primeros números de la serie tal que uno sea el sucesivo del otro, en este caso podemos definir un *a=0* y un *b=1*, la idea es que a adquiera el valor de *b* y que *b* adquiera el valor de *a+b*, pero este *a+b* debe contener los valores "originales de "*a*" y "*b*" antes de que "actualicen" tal que necesitamos definir una variable c que contenga el valor de "*a+b*" antes de actualizar "*a*" y "*b*"; el elemento que se tendrá que imprimir en consola será el valor de "*a*".
-- **Introducir instrucción dentro del bucle**.- es necesario introducir nuestra función "*printf ("%d",a)*" dentro de un bucle para que *printf* se repita tantas veces queramos.
+- **Definir la serie de Fibonacci:**- La serie de Fibonacci es una secuencia de números en la que cada número es la suma de los dos números anteriores; podemos empezar definiendo en variables los primeros números de la serie tal que uno sea el sucesivo del otro, en este caso podemos definir un "*a=0*" y un "*b=1*", la idea es que a adquiera el valor de "*b*" y que "*b*" adquiera el valor de "*a+b*", pero este "*a+b*" debe contener los valores "originales de "*a*" y "*b*" antes de que "actualicen" tal que necesitamos definir una variable c que contenga el valor de "*a+b*" antes de actualizar "*a*" y "*b*"; el elemento que se tendrá que imprimir en consola será el valor de "*a*".
+- **Introducir instrucción dentro del bucle**.- es necesario introducir nuestra función "*printf ("%d",a)*" dentro de un bucle para que *printf* se repita tantas veces como queramos.
 - **Usar un "input" para definir el número de elementos**.- se tendrá que declarar una variable que contenga el valor que el usuario introduzca en la consola y que al mismo tiempo hará de condición en nuestro bucle *(i<n)*.
 
 **Resolución**
@@ -479,3 +448,77 @@ Podemos notar que si empezamos por "*+*", a cada "*+*" le corresponde el número
 
 ![Ejercicio 3](img/e3p2.png)
 
+4.- *Anidar bucles*: es la acción de generar un bucle dentro de otro bucle, de tal forma que puedes generar algunas interacciones muy curiosas. Por ejemplo, si quieres imprimir dos caracteres alternados tantas veces como sea el número de elementos de una serie de Fibonacci, puedes hacerlo de la siguiente manera:
+
+- Crear un bucle principal que contenga a la serie de Fibonacci.
+- generar otro bucle antes de cerrar el bucle principal que contenga como condición de final a cada número que se imprimirá en la sucesión de Fibonacci. Tal que:
+
+    Fibonacci: 0
+
+    Fibonacci: 1
+    -> Repetición 1
+
+    Fibonacci: 1
+  -> Repetición 1
+
+    Fibonacci: 2
+  -> Repetición 1
+  -> Repetición 2
+
+    Fibonacci: 3
+  -> Repetición 1
+  -> Repetición 2
+  -> Repetición 3
+
+- Usar un condicional (dentro del segundo bucle) que alterne entre dos caracteres, tal que si el número de repetición es par imprima un "*-*" y si es impar un "*+*".
+
+**Resolución:**
+![Ejercicio 4](img/e4.png)
+
+![Ejercicio 4](img/r4.png)
+
+5. Imprima en la consola "- ++ --- ++++" ... sucesivamente.
+
+- Ya te la sabes , solo tienes que hacer un bucle dentro de otro bucle que contenga un condicional que alterne entre los caracteres con algunas variaciones.
+
+**Resolución:**
+![Ejercicio 5](img/e5.png)
+
+![Ejercicio 5](img/r5.png)
+
+### Imprimir dibujos
+
+¿Sabías que puedes crear un plano cartesiano usando dos bucles anidados?
+
+Si:
+
+        #include "stdio.h"
+        int main()
+        { 
+        for (int i=0; i<size; i++){
+            
+            for (int j=0; j<size; j++){
+                //Poner condicional
+        }
+        } printf ("\n") 
+        return 0;
+        }
+
+El bucle anidado se representaría: *(0, 0 1 2)\n; (1; 0 1 2)\n; (2; 0 1 2)\n*, tal que se tienen los siguientes **pares ordenados**: 
+
+![Plano cartesiano](img/plano.svg)
+*Si esto no es algebra lineal, no se qué lo será*
+
+**Advertencia**: *para esta funcionalidad, prioriza utilizar la estructura "for" y empezar cada bucle desde 0, para evitar problemas de indexación*.
+
+Puedes jugar con este *plano cartesiano* y un condicional para imprimir diferentes figuras y letras en la consola. por ejemplo, si elijes un tamaño de 4x4 *(el tamaño es el término despues de "<" en cada bucle)*, puedes dibujar una "X" con el siguiente condicional
+
+![Ejercicio 6](img/e6p1.png)
+*"||" dentro de un condicional marcan una disyunción y "&&" una conjunción*
+
+*Nótese que las condiciones puestas son la definción matemática para la diagonal principal y secundaria de una matriz en Álgebra Lineal.*
+
+Para dibujar una "P":
+
+![Ejercicio 6](img/e6p2.png)
+*En este caso las lineas verticales y horizontales se dibujan como en una plano cartesiano, tomar en cuenta que los bucles no cuentan hasta el "tamaño" sino hasta un número menor, razón que para dibujar la linea vertical a la última columna se utiliza "size-1"*.
