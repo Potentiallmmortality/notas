@@ -208,14 +208,16 @@ Para crear las llaves *ssh*, primero se debe crear un directorio *.ssh* (oculto)
 
 Creación de la llave *ssh*:
 
-    ssh-keygen -t ed25519 -C "github_email"
-    *ingresar directorio y archivo para la key*
+    ssh-keygen -t ed25519 -C "github_email"  ~/*ingresar directorio y archivo para la key*
 
 El comando te avisara cuáles serán tus claves privadas y públicas.
 
-Ahora solo queda inciar el *ssh agent* para agregar tu *key* personal al equipo:
+Ahora solo queda inciar el *ssh agent* 
 
     eval "$(ssh-agent -s)"
+
+para agregar tu *key* personal al equipo:
+
     ssh-add ~/.ssh/*nombre_de_tu_key_privada*
 
 Y por último tienes que agregar tu *key* pública a tu cuenta de github.
@@ -522,3 +524,22 @@ Para dibujar una "P":
 
 ![Ejercicio 6](img/e6p2.png)
 *En este caso las lineas verticales y horizontales se dibujan como en una plano cartesiano, tomar en cuenta que los bucles no cuentan hasta el "tamaño" sino hasta un número menor, razón que para dibujar la linea vertical a la última columna se utiliza "size-1"*.
+
+### Barra de carga
+
+![Barra_Carga](img/e7p1.png)
+
+- *Para este ejercicio se necesita primero exportar la libreria "unistd.h" que nos permitira ejecutar la instrucción "usleep()".*
+- *Buscamos generar primero un bucle que haga que nuestro porcentaje varie de 0 a 100, pero el número de elementos que se representarán en nuestra barra no necesariamente será 100 por lo que debemos utilizar una regla de 3 para llegar a la equivalencia de qué número de carácteres se deben mostrar en la barra de carga.*
+- *El siguiente bucle cargará una serie que va desde o hasta el número de carácteres que se haya calculado hasta arriba, y se imprimira en la pantalla el símbolo selecionado.*
+- *El siguiente bucle cargará otra serie desde el número de carácteres hasta el tamaño de la barra de carga, y se imprimirá un caracter vacio; de tal forma que la barra se rellene hasta un porcentaje lleno pero se mantenga vacia la parte que no se ha cargado.*
+- *Antes y despues de iniciar estos dos bucles hay dos "printfs", uno dedicado a imprimir "[" con una condición especial "\r" y otro dedicado a imprimir "]" junto con el porcentaje de carga en el que nos encontremos en dicho momento.*
+- *En realidad el "\r" hace que el cursor vuelva al inicio de la linea, por lo que cada vez que los bucle avanzan, la barra no se está cargando sino que se esta borrando y rescribiendo constantemente, lo que da la impresión de que se está cargando. La acción de la función usleep(milisegundos) es la de retrasar cada bucle por un tiempo determinado para ayudar a la impresión de la barra de carga.*
+
+Puedes guardar tu código en una librería para poder reutilizarlo de formas muy interesantes más adelante. Por ejemplo, puedes utilizar la función de imprimir letras junto con las barras de carga para hacer un lindo programa:
+
+![ejercicio7](img/e7p2.png)
+![ejercicio7](img/e7p3.png)
+![ejercicio7](img/e7p1.png)
+
+
