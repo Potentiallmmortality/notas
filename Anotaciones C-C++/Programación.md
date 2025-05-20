@@ -208,7 +208,9 @@ Para crear las llaves *ssh*, primero se debe crear un directorio *.ssh* (oculto)
 
 Creación de la llave *ssh*:
 
-    ssh-keygen -t ed25519 -C "github_email"  ~/*ingresar directorio y archivo para la key*
+    ssh-keygen -t ed25519 -C "github_email"  
+    
+    *ingresar directorio y archivo para la key*
 
 El comando te avisara cuáles serán tus claves privadas y públicas.
 
