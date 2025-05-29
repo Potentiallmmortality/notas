@@ -177,17 +177,17 @@ Se hace un commit de la rama en la que se este trabajando, para luego cambiarse 
 
 El proceso completo de drear una rama nueva, trabajar en ella y luego unir los cambios a la rama principal queda tal que:
 
--*git branch freatures*
+    git branch  //poner rama aquí
 
--*git switch freatures*
+    git switch //rama a la que cambiarse
 
--*git commit -m ""*
+    git commit -m "//mensaje del commit"
 
--*git switch main*
+    git switch main
 
--*git merge fratures*
+    git merge //rama con la que quieras unir los cambios
 
--*git branch -d freature*
+    git branch -d //rama a eleminar
 (**opcional**: esta parte borra la rama mencionada en el comando)
 
 >29 de abril de 2025, clase 06 de Programción I
@@ -541,7 +541,117 @@ Para dibujar una "P":
 Puedes guardar tu código en una librería para poder reutilizarlo de formas muy interesantes más adelante. Por ejemplo, puedes utilizar la función de imprimir letras junto con las barras de carga para hacer un lindo programa:
 
 ![ejercicio7](img/e7p2.png)
+
 ![ejercicio7](img/e7p3.png)
+
 ![ejercicio7](img/e7p1.png)
 
+>>27 de mayo de 2025, claase 14 de Programación I
 
+### Arrays (dos dimensiones)
+
+Para declarar una matriz en c/c++ se debe seguir las siguiente estructura:
+
+    data_type array_name[i][j]={
+    {a,b,c},
+    {d,e,f}
+    }
+
+donde *"i"* y *"j"* son los números de filas y columnas de la matriz, respectivamente.
+
+Es importante aclarar que si no vamos a llenar la matriz de datos inmediatamente o si la queremos llenar en torno a un bucle o secuencia debemos primero encerar una matriz por medio de un bucle:
+
+**Para una matriz fila**:
+
+    for (int a=0; a < i; a++)
+        array[a]= 0;
+
+Buscamos que la matriz se llene de ceros, antes de meter otros valores en ella para evitar problemas en los espacios de memoria asignados a la matriz,
+
+**Para una matriz fila x columna**:
+
+    for (int a=0; a < i; a++)
+        for(int b=0; b<j; b++)
+            array[a][b]=0;
+
+*Importante recordar que los índices de los arreglos se enumeran desde "0"*
+
+Para proceder a llenar estos arreglos de manera estructurada podemos utilizar los mismos bucles.
+
+## Automatas y Máquinas de estado
+
+Planteemos un pequeño problema, queremos hacer un programa encargado de monitorear el comportamiento de un virus mediante las siguientes reglas:
+
+- El virus originalmente se encuentra en un estado de "0" con una temperatura por defecto.
+- Si la temperatura aumenta, el virus muta a "1".
+- Si la temperatura aumenta cuando el virus esta en "1", sique en el mismo estado.
+- Si la temperatura disminuye, el virus muta a "2".
+- Si la temperatura disminuye cuando el virus esta en "2", sique en el mismo estado.
+- Si el virus se encuentra en "0" y se le da la proteina "a" muta a "3".
+- Si el virus se encuentra en "1" y se le da la proteina "b" muta a "3".
+- Si el virus está en "2" y se le da la proteina "c" muta a "3".
+- Si el virus se encuentra en "3" y se le da la proteina "a" no muta.
+- Si el virus se encuentra en "0" y se le da una proteina "x" tampoco muta.
+- Toda instrucción no contemplada hace que el virus muera.
+
+En el programa, el usuario metería alguna instrucción para el virus, y el programa debería mostrar el estado del virus después de la instrucción.
+
+Si intentáramos programar estas instrucciones de manera lineal, el programa sería muy largo y difícil de entender. Asi que vamos a intentar solucionar este problema mediante la teoría de Grafos.
+
+### Simbología
+
+- **Q={q_n}**: Esta es la matriz de estados del virus.
+- **Σ={a, b, c, x, t}**: Esta es la matriz de instrucciones o Alfabeto que se pueden dar al virus (aumentar temp, disminuir temp o dar proteinas).
+- **δ = Q x Σ**: Matriz de transiciones del virus (resultados despues de ejecutar cada instrucción), sus filas sera *Q* y sus columnas será *Σ*.
+- **W={w}**: Son todas las combinaciones posibles de instrucciones que se pueden dar al virus (algunas son no válidas y lo matarán).
+- **L=lenguaje**: Son todos los *W* válidos que se pueden dar al virus.
+
+Antes de proceder a resolver el problema es importatne graficar el grafo que lo representa para tener una mejor comprensión del funcionamiento del virus.
+
+<!-- ![](img/grafo.svg) -->
+
+![](img/Grafo_.png)
+
+Por cuestiones de espacio, algunas instrucciones se redujeron a meros símbolos tales como < o > para indicar aumento y disminución en la temperatura, los numeros para indicar los diferentes estados de mutación del virus y las letras para indicar las proteinas.
+
+**Advertencia:** *otro aspecto a tomar en cuenta es que el siguiente método de resolución no funcionará si es que la misma instrucción sale dos o más veces de un mismo estado.*
+
+Para empezar a resolver tenemos que armar nuestras matrices de estados y nuestro Alfabeto con lo que tenemos; usaremos la simbología del gráfico.
+
+    enumm {q0=0,q1,q2,q3} mutacion=q0; //Matriz de estados
+    char A[]{'x','<','>','a','b','c',' ','\n'}; //Alfabeto
+    
+Para llenar la matriz de transiciones **δ = Q x Σ** debemos observar las cosencuencias de cada instrucción en cada mutación, por ejemplo:
+
+-  δ0(q0,>)= q1
+-  δ1(q1,b)= q3
+-  δ3(q0,x)= q0
+-  etc..
+
+Una forma más facil de hacerlo sería mediante la siguiente tabla:
+
+| Estado | x | > | < | a | b | c | '' | \n |
+|:------:|:-:|:-:|:-:|:-:|:-:|:-:|:---:|:--:|
+|  q0    | 0 | 1 | 2 | 3 |   |   |  0  | 0  |
+|  q1    |   | 1 |   |   | 3 |   |  1  | 1  |
+|  q2    |   |   | 2 |   |   | 3 |  2  | 2  |
+|  q3    |   |   |   | 3 |   |   |  3  | 3  |
+
+Todos los espacios en blanco son instrucciones no contempladas por lo que en esos espacios se podría decir que ha muerto, a la hora de llenar la matriz en c/c++ podemos rellenar dichos espacios con algun término que no se vaya a utilizar. Tambien se han aumentado *' '* y *'\n'* como instrucciones del Alfabeto, en ellas ponemos los estados correspondientes respecto a la fila en que nos encontremos.
+
+    int Mt[4][8] = {
+    {0, 1, 2, 3, -1, -1, 0, 0},  // q0
+    {-1, 1, -1, -1, 3, -1, 1, 1}, // q1
+    {-1, -1, 2, -1, -1, 3, 2, 2}, // q2
+    {-1, -1, -1, 3, -1, -1, 3, 3}  // q3
+    };
+
+**Nota**: Se ha reemplazado los terminos nulos (espacios en blanco de la matriz) por '-1'.
+
+Lo que acbamos de hacer es armar una matriz que comtempla toda las posibles instrucciones (matriz W) que se le pueden dar a los diferentes estados asi como sus diferentes resultados.
+
+A partir de esta matriz ya podemos empezar a programar, necesitaremos:
+
+- El usuario debe empezar ingresando una instrucción sea válida o invalida.
+- Debe haber un diccionario que revise si la instrucción proporcionada existe.
+- Hacer un bucle que muestre los diferentes *q_n* para una misma instrucción hasta que el virus "muera".
