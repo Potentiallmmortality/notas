@@ -578,6 +578,12 @@ Buscamos que la matriz se llene de ceros, antes de meter otros valores en ella p
 
 Para proceder a llenar estos arreglos de manera estructurada podemos utilizar los mismos bucles.
 
+Declarar una cadena de caracteres en c/c++ se hace de la siguiente manera:
+    char *string[];
+    char string[255];
+
+Si no sabes cuál será el tamaño del arreglo, puedes utilizar el asterísco; si sabes el tamaño aproximado que puede tener puedes ponerlo en la declaración.
+
 ## Automatas y Máquinas de estado
 
 Planteemos un pequeño problema, queremos hacer un programa encargado de monitorear el comportamiento de un virus mediante las siguientes reglas:
@@ -655,3 +661,72 @@ A partir de esta matriz ya podemos empezar a programar, necesitaremos:
 - El usuario debe empezar ingresando una instrucción sea válida o invalida.
 - Debe haber un diccionario que revise si la instrucción proporcionada existe.
 - Hacer un bucle que muestre los diferentes *q_n* para una misma instrucción hasta que el virus "muera".
+
+>6 de junio
+
+## Validacion de un Mail
+
+Para este caso se van a manejar los siguientes conjuntos:
+
+**l[i]**: Esta matriz contiene todas las letras a utilizar en el email.
+
+    l[i]={'a','b'...'z','A','B',...'Z'} 
+
+**\+/\***:"*+*" representará el número de veces que se repetirá algún caracter de  de "*l[i]*", mientras que "*\**" representará algún caracter ya sea "*_*" o "*-*" dentro del mail.
+
+    +[i]={'1','2','3',...n}
+    *[i]={'_','-','*',etc}
+
+**d**: Albergará el dominio del email a verificar.
+
+    d={@dominio.com}
+
+El objetivo para este tipo de problemas será desarrollar un "*input*" en el cual meter una cadena de caracteres para verificarse.
+
+### Representación en grafo
+
+En el input, el usario podrá meter diferentes combinaciones que pueden ser ejemplificadas y representadas como:
+
+**l[i]l[i],l[i]+/_l[i]+@d**
+
+*considerar que la barra inclinada "/" es hace disyunción dentro de esta representación ya que una letra puede estar seguida de otra o simplemente ser reemplazada por otro tipo de caracter. Considerar tambien que repetir una letra no hace que el estado del autómata "suba"*.
+
+![](img/mail.png)
+
+Dado:
+
+![](img/mail2.png)
+
+podemos interpretr algunas instrucciones instrucciones dadas:
+
+    w1= bcddde
+    w2= bce
+    w3= a
+
+## Tipos, operadores y expresiones
+
+    char s[]="125"
+    int i=atoi(s);
+    isdigit(/*poner un caracter*/);
+
+- **atoi()**: Transforma una variable dada a un entero
+- **isdigit()**: Devueleve un valor de verdadero o falso para saber si una variable dada es entero.
+
+### Algunas librerias nuevas (para C++)
+
+    #include "iostream"
+    int main(int argc, cahr *argv[])
+    std::cout << "Hola Mundo" << std::endl;
+
+**iostream** es una librería que denota una forma alternativa de imprimir "Hola mundo"; *std::out* selecciona la función *out* de la librería estandar (comunmente conocida como *printf*) y std::endl marca el fin de la linea (*\n*); naturalmente, la funcion *std::cin* corresponderá a la función *scanf*.
+
+    include "iostream"
+    using namespace std;
+    int edad=0;
+    cout << "Ingrese la edad: ";
+    cin >> edad;
+
+He aqui un ejemplo:
+
+![](img/iostream.png)
+
