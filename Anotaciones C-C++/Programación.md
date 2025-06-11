@@ -672,12 +672,12 @@ Para este caso se van a manejar los siguientes conjuntos:
 
     l[i]={'a','b'...'z','A','B',...'Z'} 
 
-**\+/\***:"*+*" representará el número de veces que se repetirá algún caracter de  de "*l[i]*", mientras que "*\**" representará algún caracter ya sea "*_*" o "*-*" dentro del mail.
+**\+/\***:"*+*" representará la necesaria existencia de un "*l[i]*" que aumentará el estado del autómata pero que al repetirse mantendrá esa nuevo eestado, mientras que "*\**" representará la existencia opcional de un "*l[i]* que no alterará el estado del autómata".
 
-    +[i]={'1','2','3',...n}
-    *[i]={'_','-','*',etc}
+    +[i]={'1','2','3',...n};
+    *[i]={1,2,3,...m};
 
-**d**: Albergará el dominio del email a verificar.
+**d**: Albergará el dominio del email a verificar. Al momento de programar el autómata lo podemos representar con un caracter especial ya que comparar un caracter con 
 
     d={@dominio.com}
 
@@ -691,6 +691,8 @@ En el input, el usario podrá meter diferentes combinaciones que pueden ser ejem
 
 *considerar que la barra inclinada "/" es hace disyunción dentro de esta representación ya que una letra puede estar seguida de otra o simplemente ser reemplazada por otro tipo de caracter. Considerar tambien que repetir una letra no hace que el estado del autómata "suba"*.
 
+*El ejemplo corresponde a un autómata cuya condicion es la existencia de tres términos en el usuario antes del '@'; a partir del estado q3 cualquier término l[i] solo mantendrá el estado actual y serán necesarios otros signos "especiales" para avanzar*
+
 ![](img/mail.png)
 
 Dado:
@@ -699,7 +701,7 @@ Dado:
 
 podemos interpretr algunas instrucciones instrucciones dadas:
 
-    w1= bcddde
+    w1= bcd*e
     w2= bce
     w3= a
 
@@ -729,4 +731,3 @@ podemos interpretr algunas instrucciones instrucciones dadas:
 He aqui un ejemplo:
 
 ![](img/iostream.png)
-
