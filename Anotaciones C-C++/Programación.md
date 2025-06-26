@@ -714,7 +714,13 @@ podemos interpretr algunas instrucciones instrucciones dadas:
 - **atoi()**: Transforma una variable dada a un entero
 - **isdigit()**: Devueleve un valor de verdadero o falso para saber si una variable dada es entero.
 
-### Algunas librerias nuevas (para C++)
+### Algunas librerias y cosas nuevas (para C++)
+    
+    #include "stdlib.h"
+Es necesaria para usar **atoi()**
+
+    #include "ctype.h"
+Es necesatia para usar **isdigit()**
 
     #include "iostream"
     int main(int argc, cahr *argv[])
@@ -731,3 +737,195 @@ podemos interpretr algunas instrucciones instrucciones dadas:
 He aqui un ejemplo:
 
 ![](img/iostream.png)
+
+> Aqui terminó la primera parte
+
+*En diagramas de flujo el incio y ell fin van encerrados en un rectángulo redondeado, las entradas van en trapezoides, los procesos van en rectángulos, y los condicionales tienen que eventualmente integrarse en el flujo principal; recuerda que debe haber solo un solo inicio y final.*
+
+# Anotaciones Segundo Bimestre
+
+< Desde aquí se empieza a ver C++
+
+## Ejercicios
+
+### Juego de cruzar el puente
+
+Hay 4 Personajes/Items a valorar: el observador (O), la caperucita (C), uvas (U) y un lobo (L). Se desea que ellos cruzan desde una orilla del rio hasta la otra mediante una barca, pero la barca solo tiene espacio para 2 tripulantes y el único que puede manejarla es el observador. Al mismo tiempo, se sabe que la caperucita no se la puede dejar sola con la uvas pues se las comería y el lobo no se lo puede dejarlo solo con la caperusita pues tambien se la comería.
+
+El objetivo es desarrollar un programa que pueda ilustrar este problema (gráfico y animación de cruzar el río y las acciones que pueda hacer el usuario a lo largo del juego).
+
+Esta vez no se programará un atuómata.
+
+#### Planificación de como hacerlo
+
+Para representar a todos los personajes en una orilla podemos valernos de:
+
+- Un *string* o *array* para representar a los personajes de en la orilla izquierda del río, y otro *string* para representar a todos los que han cruzado al otro lado:
+
+        string ladoIzq= "O,L,C,U",
+        ladoDer= "' ',' ',' ',' '";
+
+- Revisar el lado opuesto a donde se encuentre el observador (O), para eso definir una variable que diga si algún item se encuentra en el lado izquierdo del río:
+
+        bool obEstIzq = true; //¿El objeto está a la izquierda?, puede ser "True" o "false"
+
+- Mostrar un menú con las opciones de a quién se debe llevar: con un *cout* y un *switch* debe bastar.
+- Determinar qué va a pasar con un lado y el otro despues de seleccionar a un personaje/objeto: Se planea que el menú sincronice sus números con las posiciones del string de la orilla del lado izquierdo, de tal manera que la opción seleccionada por el usuario se alinee con alguna posición del string, actualice su valor a 0, busque esa posición en la orilla izquierda y la actualice el otro lado del río.
+- Mostrar la animación de la barca cruzando el río. Importante sber de cuántos carácteres de largo vamos a hacer al río.
+        int riolong=20; //algún valor arbitrario para la longitud del río
+
+ ##### Algunas carácterísticas de C++
+
+- La manera de **importar librerías** en C cambia, ya no se utilizarán "" sino <> y en la mayoría de casos no será necesario poner la terminación *.h*.
+
+        #include <iostream> // A esta ya la conoces, reemplazo del clásico "stdio.h"
+        #include <windows.h> // Esta es el reemplazo de la librería de c "unistd.h", con esta función puedes usar "usleep" que ahora es "Sleep()"
+        #include <string> // Permite el manejo de Arrays horizontales como datos string
+        #include <vector> // Permite el manejo de los string como si gueran vectores
+        #include <limits> // Me permite utilizar comandos como : cin.fail(),cin.clear(),cin.ignore(numeric-limits<streamsize>::maxc(), '\n')
+- Un nuevo tipo de variable, C++ permite el manejo de datos booleanos (bool).
+
+- Usando la librería **<♠string>** podemos utilizar instrucciones como: *strlen()* o *variable.lengh()*, útiles para calcular el número de elementos de una *string* si esta se actualiza constantemente, recuerda separar los elementos de un string con "".
+- **Nuevas notaciones**:
+        a=a+10 // es lo mismo que a+=10
+        string cadena(i,'c') // en el string "cadena" se imprimirá el carácter 'c' i veces.
+
+Y estamos listos para continuar.
+
+**Validar que los inputs de un usuario no crasheen tu programa**:
+
+![](img/verDatos.png)
+
+*Lo nuevo*: el **&** despues de *string* indica que debe haber una asignación por defecto a los parametros con los que se trabaja en caso de que al usar la función haya parámetros insuficientes. Esta mecánica en *c++* es conocida como puntero:
+
+- Poner un **"True"** dentro de la condición de bucle hace que este se repita infinitas veces, de tal manera que se vuelva a pedir el valor de la variable al usuario hasta que el ciclo se rompa. 
+- El comando **cin.fail()** devuelve un valor booleano ("*true* o *false*") de acuerdo a si la variable se ha guardado y escaneado exitosamente; en este caso, si la variable se guarda correctamente (*cin.fail()* da falso) y se cumple con los rangos del número especificado se rompe el bucle mediante la palabra reservada **break** y se procede a devolver dicho valor. 
+- Si el bucle se repite, necesariamente de debe hacer uso de **cin.clear()** y **cin.ignore()** para limpiar y encerar la variable de nuevo, para que vuelva a ser escaneada. *En pocas palabras, el bucle se repite infinitamente ante una tautología*.
+
+![](img/puntero.png)
+
+- En este caso el **&** indica también que para el dato recibido no se creará otro espacio de memoria, sino que se le dará un puntero a la variable en el que se "guardará" para que esta pueda leer la info asignada en una dirección específica de memoria; *digase que el puntero es un papelito con la dirección de donde encontrar la info necesaria*.
+
+- El **(auto && p :)** puede usarse como un argumento para bucle, en este caso hace que en cada instancia de dicho bucle a la variable p se le de un puntero para escanear cada miembro individual del vector de strings recibido.  
+
+ 
+#### Programación del acertijo por partes
+
+**Declaaración de Variables**: Declararemos las variables que necesitamos de forma global, fuera de cualquier bloque del archivo *.cpp* (serán válidas para todo ese archivo *.cpp*):
+
+        #include <iostream>
+        #include <windows>
+        #include <string>
+        using namespace std;
+        bool objEstIzq= true;
+        string ladoIzq= "O,L,C,U",
+        ladoDer= "' ',' ',' ',' '";
+        int riolong=20;
+
+**Actualización de Ambos lados**:
+
+![](img/Getpersonaje.png)
+
+**Animación del Bote moviendose**:
+
+![](img/moveBarca.png)
+
+**Menu de Selección de los Personajes**
+
+![](img/getMenu.png)
+
+- Mostramos en consola los personajes de cada orilla, el rio y la barca, seguido de las opciones con sus respectivos npumeros, existe un bucle que se mantiene si la opción proporcionada por el usuario está por fuera de los rangos que requiere el programa, ademas se utiliza la función que permite validar que se haya metido un entero.
+
+- Se tienen tres condicionales, el primero checa si se ha ingresado un 4 (salir) para finalizar la ejecución del programa, el segundo revisa si la opción seleccionada corresponde a un personaje a la izquierda o derecha del rio y dependiendo de eso la variable personaje seleccionado es asignada a la poscición donde su personaje se encuentre (derecha o izquierda). Y por último, si el personaje seleecionado se le es asignado a un caracter vacio, el programa le asigna un valor fuera del rango del condicional condelandolo a repetirse.
+
+**getBarca()**: Este bloque de código se dedicará a incluir las animaciones de movimiento de la barca, mientras que tambien desempeñará la lógica de cambio de lado por cada personaje.
+
+![](img/Barca.png)
+
+- Para animar al barco de ida y de vuelta se recurre a usar un condicional en base al lado en el que el juego se encuentre, si se está a la izquierda el string de la barca ha de ser concatenado en medio del los carácteres del rio de la izquierda y la derecha o viceversa si está del otro lado.
+- Para hacer el cambio de personaje se procee a "*borrar*" (**encerar**) la parte de los arreglos en donde se encuentre el observador y el personaje seleccionado, de nuevo se tiene un condicional que basado en el lado en el que se encuentre el observador asigne en esa posición pero en el lado contrario al observador y al personaje seleccionado.
+- Por último se llama al método **isValid** y se cambia al juego de lado, en pocas palabras, el valor de true que indicaba el lado se convierte en false.
+
+**isValid()**: En base al lado en el que se encuentra el juego, los condicionales revisan si en el lado contrario al observador la posición de la caperusa y lobo o la de la caperusa y las uvas se encuentran solas (vacias), en base a si se cumplen o no esas reglas del juego se devuelve el valor de "*true*" o "*false*",
+
+![](img/isValid.png)
+
+**main()**: El bloque principal tendrá un bucle que se repite infinitamente con una tautología a partir del valor que devuelva la función **getMenu()**.
+
+![](img/Main.png)
+
+## Manejo de las librerías **vector**, **string** y **fstream**
+
+### Vectores de strings, strings y carácteres.
+
+Anteriormente pudimos ver que gracias a la librería **string** podíamos guardar varios carácteres en un "arreglo" sin la limitación de indicar tamaños, aunque el uso de este tipo de datos puede traer confusión en conparación a los *arrays* tradicionales que se usaban antes en C, y es que se debe tener cuidado al momento de manejar los punteros e indexación de los strings para evitar errores de compilación.
+
+Antes de comenzar a usar datos de tipo **string** deberíamos entender por completo algo de la *syntaxis* asociada a estos arreglos especiales en C++:
+
+- Para representar un caracter se utiliza **'v'**
+- Para representar un string se utiliza **" "**
+- Un conjunto de varios carácteres forma un string **" ' ' ' ' "**, lo que significa que de un *string* puedes extraer carácteres o que si piensas modificar una componente en específico el dato que debes de ingresar deber ser un *char* (*''*).
+- Puedes crear un vector que se componga de strings mediante las librerías *vector* y *string* tal que: *{" "," "}*. De un vector compuesto de strings puedes extraer strings de dicho vector y si piensas modificar una componente debes ingresar un dato de tipo *string* (*" "*)
+- Por último, puedes crear vectores de vectores de strings, de tal manera que puedes manejar matrices en las que cada componente individual corresponde a un *string* (*" "*).
+
+        #include <vector>
+        #include <string>
+        using namespace std;
+
+        string palabra = "hola";
+        char primeraLetra = palabra[0]; // 'h'
+        palabra[1] = 'o';               // modifica la segunda letra
+
+        vector<string> nombres = {"Ana", "Luis", "Juan"};
+
+        string persona = nombres[0];     // "Ana"
+        nombres[1] = "Carlos";           // cambia "Luis" por "Carlos"
+
+        vector<vector<string>> tablero = {
+        {"A1", "B1"},
+        {"A2", "B2"}
+        };
+
+#### Recorrer un vector de strings o un vector de vector de strings
+
+Se puede utilizar los siguientes bucles para vectores compuestos de strings:
+
+        void nombreMetodo(const vector<string> &vector){
+            for(auto && variable : vector) //El bucle se ajusta al tamaño del vector para recorrerlo
+            {
+                (variable.empty())? cout << "[]" << endl : cout << variable << endl; 
+            } 
+        } //imprimir un vector de strings dado en la consola
+
+        string nombreMetodo(const vector<string> &vector){
+            string a="";
+            for(auto && variable : vector)
+            {
+                (variable.empty())? a+= "[]" : a+= variable; 
+            }
+            return a;
+        } //retornar un vector dado (util si este se actualiza en un bucle progresivamente)
+
+Se pueden usar los siguientes bucles para vectores compuestos de vectores de strings:
+
+        void nombreMetodo(const vector <vector<string>> &vector){
+            for(auto && variable : vector) //El bucle se ajusta al tamaño del vector para recorrerlo
+            {
+                for(auto && variable2 : variable) //Bucle anidado
+                (variable2.empty())? cout << "[]" << endl : cout << variable2 << endl; 
+            } 
+        } //imprimir un vector de strings dado en la consola
+
+        string nombreMetodo(const vector <vector<string>> &vector){
+            string a="";
+            for(auto && variable : vector) //El bucle se ajusta al tamaño del vector para recorrerlo
+            {
+                for(auto && variable2 : variable) //Bucle anidado
+                (variable2.empty())? a+= "[]" : a+= variable2; 
+            }
+            return a;
+        }
+
+### fstream
+
+Es una librería destinado al manejo de un flujo para la lectura y escritura de archivos. Osea que se pueden leer y escribir archivos de texto. Podemos utilizar el siguiente código para ello.
