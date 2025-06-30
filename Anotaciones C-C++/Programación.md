@@ -928,4 +928,40 @@ Se pueden usar los siguientes bucles para vectores compuestos de vectores de str
 
 ### fstream
 
-Es una librería destinado al manejo de un flujo para la lectura y escritura de archivos. Osea que se pueden leer y escribir archivos de texto. Podemos utilizar el siguiente código para ello.
+Es una librería destinado al manejo de un flujo para la lectura y escritura de archivos. Osea que se pueden leer y escribir archivos de texto. Podemos utilizar el siguiente código para:
+
+![](img/getLines.png)
+
+- La palabra clave ifstream puede designar una acción (**file** en este caso) que podemos nombrar de manera personalizada y que actuara sobre un string que ha de llevar la ruta relativa de un archivo para abrir dicho archivo
+- La acción **getline(file,variable)** escanea la primera linea del archivo y lo guarda en una en la variable *line* en este caso.
+- Aprovechamos la acción de un bucle, en este caso al poner getline en su argumento hacemos que este se ajuste al numero de líneas del archivo.
+- Nos valemos de la instrucción **variable.push_back(lo que se quiera guardar)** para guardar cada linea *string* en el vector de strings *Arr* 
+
+![](img/Tabla.png)
+
+Pero ¿Qué hay de esta tabla? Solo quiero extraer aquellos valores importantes, ahora que lo piensas, no es solo por estética que utilizo los corchetes:
+
+![](img/getTabla.png)
+
+Esta vez el código es más complejo, pero a grandes rasgos puedo decir que busca extraer la tabla, delimitada por los datos en corchetes, y devolverla en una variable de la forma de un arreglo de vectores de strings. Podrás notar que se arma la tabla de manera jerárquica: primero strings, luego la filas y por último se agrega al mega-Arreglo de vectores de strings.
+
+*Dato curioso: Aqui se utilizan de nuevo esos bucles anidados que usabamos al principio para imprimir matrices y gráficos en la consola, sobre todo al momento de imprimir los datos que vayas "importando", eso debería ser util ya que C++ no proporciona una menra gráfica de ver tus Arrays*.
+
+### ctype.h
+
+Hermosa Librería, te permite utilizar "*instrucciones*" como:
+| Función       | ¿Qué hace?                                                     | Ejemplo                |
+| ------------- | -------------------------------------------------------------- | ---------------------- |
+| `isdigit(c)`  | Devuelve `true` si `c` es un dígito (`0–9`)                    | `isdigit('3') → true`  |
+| `isalpha(c)`  | Devuelve `true` si `c` es una letra (`a–z` o `A–Z`)            | `isalpha('a') → true`  |
+| `isalnum(c)`  | Devuelve `true` si `c` es una letra o número                   | `isalnum('9') → true`  |
+| `isupper(c)`  | Devuelve `true` si `c` es una mayúscula                        | `isupper('A') → true`  |
+| `islower(c)`  | Devuelve `true` si `c` es una minúscula                        | `islower('g') → true`  |
+| `isspace(c)`  | Devuelve `true` si `c` es espacio, tab, salto de línea, etc.   | `isspace(' ') → true`  |
+| `ispunct(c)`  | Devuelve `true` si `c` es signo de puntuación                  | `ispunct('.') → true`  |
+| `isxdigit(c)` | Devuelve `true` si `c` es un dígito hexadecimal (`0–9`, `A–F`) | `isxdigit('F') → true` |
+| `iscntrl(c)`  | Devuelve `true` si `c` es un carácter de control (ej. `\n`)    | `iscntrl('\n') → true` |
+| `isprint(c)`  | Devuelve `true` si `c` es imprimible (excepto control)         | `isprint('A') → true`  |
+| `isgraph(c)`  | Igual que `isprint()`, pero excluye el espacio                 | `isgraph('#') → true`  |
+
+Útiles para contar letras o números de un texto.
