@@ -2,3 +2,5 @@
 *.pdf
 *.html
 *.drawio
+output/
+*.cpp

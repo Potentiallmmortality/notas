@@ -965,3 +965,72 @@ Hermosa Librería, te permite utilizar "*instrucciones*" como:
 | `isgraph(c)`  | Igual que `isprint()`, pero excluye el espacio                 | `isgraph('#') → true`  |
 
 Útiles para contar letras o números de un texto.
+
+## Recurcividad
+
+        #inlcude <iostream>
+        using namespace std;
+        int factorial(int f)
+        {
+        if ( f==1)
+            return f;
+        return (f *factorial(f-1);)
+        }
+
+Piesa un momento, ¿Qué tiene de diferente este método?
+
+El método que viste anteriormente es un bloque dedicado a calcular el factorial de un número dado, el factorial como operación matemática consta de multiplicar un número dado por su antecesor hasta llegar al uno.
+
+Para poder caluclar un factorial usalmente se usa un método recursivo. En el código mostrado anteriormente, la función se llama a si misma cuántas veces sean necesarias hasta llegar al 1. 
+
+Podemos usar la recursividad para hacer una cuenta regresiva de un número hasta el 1, por ejemplo:
+
+    int contadorDesc(int n){
+    if (n == 1) return n; //condición para parar
+    cout << n << '\t';
+    return contadorDesc(n-1) //volver ejecutar el método con el número dado -1
+    }
+
+Para desarrollar un método recursivo debemos tener en cuenta lo siguiente:
+
+- Una condición de parada, es decir, un punto en el que el método ya no se llame a si; en este caso es el condicional quien para la recursividad
+- Un llamado a la función dentro de la función, pero con el parametro del conteo alterandose (*puede sumarse o restarse con algo*).
+
+De cierta manera es como si fuera un bucle alternativo, que me permite trabajar con números muy grandes o muy pequeñps sin tener que preocuparme por el espacio de memoria que ocupan. También podemos usar la recursividad para multiplicar dos cantidades sin usar el producto, ya que dicha operación se puede expresar como una suma recursiva.
+
+                3*6 = 6+6+6 = 18
+        //contador    3,2,1  
+
+La cantidad de veces que se suma el 6 corresponde de hecho a la cantidad de veces que se llama la fución respecto a una cuenta regresiva de 3 a 1.
+
+        int producto(int a, int b){
+        if (a == 1) return b;
+        return b + producto(a-1,b); //tasa de cambio, vuelve a hacer lo mismo
+        }
+
+Aqui a es como un rastreador de la cuenta regresiva y b es el número que se suma a si mismo, cada ves que se suma b, a disminuye en 1 y todo el bloque para cuando a llega a 1. De cierta manera es como si fuera un bucle con un *while* en torno a *a == 1*, y de hecho es así como funcionan los Bucles a nivel interno.
+
+        char showStr(string &nombre, int i){ //presentar string en orden inverso
+        if(i == 0) return nombre[i];
+        cout << nombre[i] << " ";
+        return showStr(nombre, i-1); //parametro de cambio
+        }
+        char showStr2(string &nombre, int i){ //presentar string en orden normal
+        if(i== nombre.length()) return nombre[i];
+        cout << nombre[i] << " ";  
+        return showStr2(nombre, i+1); //parametro de cambio
+        }
+
+Este es un ejemplo de dos bloques destinados a recibir un string e imprimirlos en la consola ya sea de manera normal o de manera inversa, como se menciona antes, al inicio del bucle se pone un condicional destinado a parar la recurción. Para el bucle que imprime el string de mi nombre al reves, a este le combiene iniciar el contador i en la poscición final de mi nombre y paralo cuando este contador especial llegue a 0, mientras que en mi segundo bloque , a este le conviene iniciar el contador en la posición 0 de mi nombre y pararlo cuando llega a su poscición final.
+
+Como en un bucle, todo lo que haga está condicionado por un contador y este contador encuentra su manera de variar cuando se llama a la función.
+
+Creo que la forma más intuitiva de entender la recursividad es verla como una *matriosca*: como un b + (b + ( b + (b + (b + (...))))), hasta que eventualmente se choca con una condición que lo hace pararse, en ese momento los () toman un valor a partir del cuál operar y dicho resultado se ha de devolver en el condicional de parada, entre medias podemos aprovechar para repetir ciertos comando un número determinado de veces.
+
+En resumen:
+
+        metodo_recursivo(){
+        if (condicion_de_parada) return valor_objetivo;
+        //Poner comando a repetir
+        return metodo_recursivo();
+        }
