@@ -1034,3 +1034,165 @@ En resumen:
         //Poner comando a repetir
         return metodo_recursivo();
         }
+
+## Estruras (custom)
+
+Las estructuras van a referir a la creación de tipos persolalizados de datos dentro de c, por ejemplo:
+
+        struct estudiante
+        {
+            string nombre;
+            int edad;
+        }
+
+        struct Mascota
+        {
+            string nombre;
+            int edad;
+        }
+
+        Mascota m = new.Mascota;
+        m.nombre = "string";
+        m.edad = 10;
+
+Nótese que mascota solo es el nombre del tipo de dato o estructura que yo creé y m es la variable que voy a usar para almacenar el valor de la estructura. Por lo tanto, si quiero accder al valor de las variables dentro de mi estructura utilizaré el nombre de la estructura seguido del nombre de la variable que quiero acceder y separadas por un punto.
+
+## Guardar una estructura en un archivo Binario
+
+Hay un problema al guardar estructuras en archivos de texto, y es que si guardo algún tipo de dato referente a un número, este se convertirá en caracter o string y si lo vuelvo a escanear este pasará al sistema como string y no como número, por lo tanto, si quiero guardar un número en un archivo de texto, necesito un archivo de tipo binario.
+
+Aunque, inclusive si usamos un archivo de tipo binario, pueden haber problemas al trabajar con strings ya que su longitud puede variar y no podemos saber cuánto espacio ocupan en memoria, por lo tanto, a veces es mejor solo trabajar solo con arreglos de  tipo char.
+
+Antes ver como crear un archivo binario, primero practiquemos un poco el concepto de estructuras personalizadas:
+
+        struct Mascota
+        {
+            string nombre;
+            int edad;
+        }
+        struct estudiante
+        {
+            int id;                  
+            int edad;    
+            char nombre[20];    
+            Mascota mascotita;   //Puedo anidar una estructura dentro de otra, en este caso mascota dentro de estudiante
+        };
+
+Para llenar lass variables de una estructura:
+
+        estudiante a1 = {1, 10, "Juan", {5, "Firulais"}}; 
+
+        //manera de llenar la estructura estudiante, se queman valores 
+        //se llena en orden de acuerdo a los aspectos definidos de la estructura
+
+En este caso concreto para llenar la variable a1 de tipo *estudiante* lo hago como si fuera un arreglo (con un corchete y separando con una coma sus miembros), nótese que cada miembro a llenar coincide con el orden en el qué declaré las mini variables de la estructura de tal manera que el 1 es la id, 10 la edad, "Juan" el nombre y mascotita la variable de tipo mascota, a la que también se le asignarán sus valores de la misma manera. Solo ten en cuenta la estructura de llaves entre las llaves de la estructura que la contiene.
+
+Tambien se tiene una manera algo más dinámica de llenar los espacios declarados de una estructura, util en caso de estar trabajando con estructuras cuyos valores internos sean desconocidos o se vayan actualizando de acuerdo al flujo del programa:
+
+        estudiante a0;              //Manera alternativa de llenar la estructura
+        a0.id      = 0 ;
+        a0.edad    = 21 ; 
+        a0.nombre[0]  = 'Ana';      //arreglo[0] = 'caracteres_que_contenga'
+        a0.mascotita.edad = 1;
+        a0.mascotita.nombre = "Firulais"; 
+
+        estudiante a2 = {2,20,"Pablo"}; //Pablo esta vez no tiene mascota 
+
+Solo tendría que poner la variable seguida de un punto el "*aspecto*" o "*valor*" (*tipos de datos internos de la estructura*) que yo quiera asignarle o cambiarle, también podras observar que para acceder a la estructura interna de tipo mascota, solo tengo que poner puntos hasta accder al nivel de sus datos (*piensa en ello como si tuvieras que navegar por un directorio de lleno de carpetas dentro. de otras carpetas hasta llegar al archivo que necesitas modificar*).
+
+        estudiante Lst[]= //Puedo crear un arreglo con las estructuras que creamos
+            { 
+            a0,
+            a1,
+            {2,20,"Pablo"},
+            a3,
+            };
+
+Tambien puedes hacer un arreglo de con datos del tipo de la estructura que se crearon antes como se muestra en la figura. Donde:
+
+- *a0*, *a1*, *a2* y *a3* son variables de tipo *estudiante*
+- *a2* está declarado de una manera diferente a los demás, pues tiene sus valores quemados.
+
+Como en un arreglo normal, puedes acceder a estas variables mediante la indexación del arreglo, de tal manera que podrías hacer algo como:
+
+        cout << Lst[2].id      ;                                       
+        cout << Lst[2].edad     ;                  
+        cout << Lst[2].nombre[0];                     
+        cout << Lst[2].mascotita.edad;             
+        cout << Lst[2].mascotita.nombre;
+Para imprimir cada variable dentro de la estructura indexada.
+
+### Guardar una estructura en un .csv
+
+Para este tipo de procesos nos aseguramos primero de importar la librería **fstream**, la cual tiene funcionalidades importantes para poder crear, escribir o leer archivos.
+
+        void saveStruc(const string & filename) {
+            ofstream archivo(filename); 
+            if (!archivo) 
+            { 
+                cout << "No se pudo abrir el archivo para escritura." << endl;
+                return;
+            }
+            for (auto && A: Lista)
+            {
+                archivo << "[" << A.id << "] " << "[" << A.edad << "] " << "[" << A.nombre << "] " << "[" << A.mascotita.edad << "] " << "  [" <<     A.mascotita.nombre << "] " << "[" << A.mascotita.tipo << "] " << endl;
+                cout << "[" << A.id << "] " << "[" << A.edad << "] " << "[" << A.nombre << "] " << "[" << A.mascotita.edad << "] " << "["   << A. mascotita.nombre << "] " << "[" << A.mascotita.tipo << "] " << endl;    
+            }
+            archivo.close();
+        }
+
+Como habíamos visto antes, hemos de utilizar el comando **ofstream** para poder abrir el archivo y poder escribir en él, no olvidemos tambien que hemos de recordar que *archivo*, en este caso, es una palabra clave cualquiera que me permite manipular al arhcivo "regido ppor *filename*".
+
+En la imagen el bloque fue programado para recibir un arreglo de estructuras como parámetro, por lo que tiene primero un "bucle autómatico" para recorrer cada elemento del arreglo y poder escribirlo en el archivo, aunque si lo que se quiere es imprimir una estrcutura dentro del archivo tambien se puede hacerlo sin el bucle.
+
+El bloque de código también funciona con cualquier otra cosa que se quiera imprimir en el archivo, solo tienes que asegurarte que la palabra clave que designaste para crear y abrir el archivo, sea la misma que usas envés de *cout* y también sea la misma que usas para cerrar dicho archivo.
+
+![](img/Datafile.png)
+
+Para hacer el proceso contrario a partir de esta tabla podemos utilizar la misma instrucción enunciada en la sección de **fstream** más arriba. En este caso, se busca extraer un arreglo de vectores de la tabla y recorrer dicho arreglo hasta acceder a los *strings* que contiene para asignarlos a los componentes de la estructura. Ten en cuenta también que cada linea puede corresponder a una estructura diferente, por lo que no sería mala idea hacer uso también de un vector de estructuras:
+
+        vector<estudiante> loadStruc(){
+        vector<vector<string>> datos;
+        estudiante b1; //estructura temporal
+        vector<estudiante> Lista_2;
+        datos = extractLines("../estructuras.csv"); 
+        for (auto && fila: datos)
+        {
+            int i=0;
+            for (auto && str : fila)
+            {
+            switch (i)
+            {
+            case 0:
+                b1.id = stoi(str);
+                break;
+            case 1:
+                b1.edad = stoi(str);
+                break;
+            case 2:
+                b1.nombre = str;
+                break;
+            case 3:
+                b1.mascotita.edad = stoi(str);
+                break;
+            case 4:
+                b1.mascotita.nombre = str;
+                break;
+            case 5:
+                b1.mascotita.tipo = str;
+                break;
+            default:
+                cout << "error de algun tipo XD" << endl; 
+                break;
+            }
+                i++;
+            }
+            Lista_2.push_back(b1); //push_back() significa: ve guardando lo que esta en parentesis en el vector
+            }
+            return Lista_2;
+        }
+
+En este bloque de código utilicé un contador en base a *i* , asociado a cada columna, y un switch (*condicional para varias condiciones*) para que se sepa que parte interna de la estructura temporal debe modificarse. Al termiar el condicional perteneciente a los *str* de la tabla, todo lo que tenga la estructura temporal se integra dentro del vector de estudiantes y el ciclo se vuelve a repetir. 
+
+Otro aspecto a destacar es que en cada instancia del bucle cada aspecto interno de la estructura temporal se reemplaza por un "*nuevo valor*"; pero si alguna parte interna de la estructura tiene un vector, se debería utilizar push back para almacenar los datos dentro de este, solo asegurate que una vez recorridos todos los *str* de la fila debes volver a encerar dichos vectores manualmente ya que si no lo haces el contenido de estos de la instancia anterior se mezcla con el nuevo (*recuerda que la estructura solo está para almacenar temporalmente los datos de una instancia del bucle, despues los reemplaza por los datos de una nueva instancia del mismo*)
+
