@@ -1192,7 +1192,190 @@ Para hacer el proceso contrario a partir de esta tabla podemos utilizar la misma
             return Lista_2;
         }
 
-En este bloque de código utilicé un contador en base a *i* , asociado a cada columna, y un switch (*condicional para varias condiciones*) para que se sepa que parte interna de la estructura temporal debe modificarse. Al termiar el condicional perteneciente a los *str* de la tabla, todo lo que tenga la estructura temporal se integra dentro del vector de estudiantes y el ciclo se vuelve a repetir. 
+En este bloque de código utilicé un contador en base a *i* , asociado a cada columna, y un switch (*condicional para varias condiciones*) para que se sepa que parte interna de la estructura temporal debe modificarse. Al termiar el condicional perteneciente a los *str* de la tabla, todo lo que tenga la estructura temporal se integra dentro del vector de estudiantes y el ciclo se vuelve a repetir.
 
 Otro aspecto a destacar es que en cada instancia del bucle cada aspecto interno de la estructura temporal se reemplaza por un "*nuevo valor*"; pero si alguna parte interna de la estructura tiene un vector, se debería utilizar push back para almacenar los datos dentro de este, solo asegurate que una vez recorridos todos los *str* de la fila debes volver a encerar dichos vectores manualmente ya que si no lo haces el contenido de estos de la instancia anterior se mezcla con el nuevo (*recuerda que la estructura solo está para almacenar temporalmente los datos de una instancia del bucle, despues los reemplaza por los datos de una nueva instancia del mismo*)
+
+## Punteros
+
+Son estructuras que apuntan o refrencian a una sección específica de la memoria ram. Estos pueden actuar al momento de clarar una variable (*reserva un espacio*) y luego al asignarle un valor (*Reemplaza todo lo que tenga el espacio por este nuevo valor*). Si bien los punteros hasta el momento se encuentran de manera implícita en este proceso de ejemplo, tambien los puedo utilizar explicitamente:
+        int a;
+        int *p; //piensa en él como una flecha que apunta espacios de la ram destinados a almacenar datos de tipo int
+        char *c; //piensa en él como una flecha que apunta espacios de la ram destinados a alamacenar datos de tipo char
+
+        *p = &a; // el puntero p apunta a donde se guarda la variable a (busca la cajita donde se guarda 'a')
+
+        p=a; // No es lo mismo que lo anterior, con esta instrucción el contenido de 'p' se llena con el contenido de 'a'
+
+Asi:
+        *p = &a  // Es como decir al compilador: cada vez que veas a 'p' asignale la id de la caja de memoria donde se almacena a
+         p = a // Es como decir al compilador: cada vez que veas a 'p' asignale el contenido de la variable 'a'.
+
+Podemos pensar en los punteros: "***" y el valor de refrencia "*&*" como una etiqueta que se le pone a una caja de memoria para que el compilador pueda identificarla; a veces es mejor trabajar con la etiqueta de los datos envés de su contenido directamente, gracias  los punteros de pueden obtimizar los procesos de carga de los programas por ejemplo.
+
+Ejemplo de como trabajan los punteros en un programa:
+        #include <iostream>
+        using namespace std;
+        int funcion(int valor) //parametro por "valor"
+        {
+            valor += 5; // en valor: |__valor__| <--- valor + 5
+            return valor;
+        }
+        void funcion_ref(int *valor) //parametro por "referencia"
+        {
+            *valor += 5; //en num: |__valor__| <--- valor + 5
+
+            // En este caso, valor le asigno la "Etiqueta" de num", si modifico a valor, modifico a num
+            // sin necesidad de crear una copia
+        }
+        int main(){
+            int num = 10; // num: |__10__|
+            cout << "Valor de num despues de la funcion por valor: " << num << endl;
+            funcion(num); // num se pasa por valor, se crea una copia de num en "valor"
+            // Notese que num no se modifica, solo retorna el valor modificado
+            cout << "Valor de num despues de la funcion por valor: " << num << endl;
+            num = funcion(num);
+            cout << "Valor de num despues de asignarle el resultado de la funcion por valor: " << num << endl;
+
+            num = 10;
+            cout << "Valor de num antes de la funcion por referencia: " << num << endl;
+            funcion_ref(&num); // num se pasa por referencia, se pasa la direccion de memoria de num
+            // Notese que num se modifica directamente
+            cout << "Valor de num despues de la funcion por referencia: " << num << endl;
+            return 0;
+        }
+
+        // si a=b ambas comparten el mismo contenido
+        // si *a=&b ambas comparten la misma direccion de memoria
+        // Para que una valor se dobleimplique con el otro: o
+
+Se que es algo un poco contraintuitivo, en matemáticas por ejemplo aprendemos que si dos variables son iguales , entonces sus valores son iguales y viceversa, pero en programación no es así, en programación si dos variables son iguales, entonces sus valores son iguales, pero si sus valores son iguales, no necesariamente son iguales esas dos vaaribales, es decir, trbajarán por separado y necesaitaré algunas líneas de código para que se comporten como si fueran una sola variable como lo vimos más arriba.
+
+               |varible_1| = |variable 2|
+                   |              |
+           [int]<--|              |-->[int]   // son dos espacios de memoria diferentes, solo comparten valor
+
+Quizás nos será conveniente pensar en la base de un puntero (*), como una especie de hipervínculo o portal que no ocupa lo mismo que una caja de memoria pero transporta al compilador a una caja de memória específica que será identificada por un (&). 
+
+    *---->&
+
+    *Variable_1 = &Variable_2 // para el compilador, variable_1 solo va a ser el asterisco, pero este asterisco transporta al compilador a la caja de memoria de variable_2
+
+         (*)-----> [__] // en realidad solo hay una caja de memoría
+
+Con esto consigo que las dos varibales se comporten como una sola ahorandome líneas de código y un espacio de memoria.
+
+### Arreglos Dinámicos
+
+Anteriormente aprendimos que los arreglos tienen una longitud fija, pero a veces necesitamos crear un arreglo cuyo tamaño no sabremos todavía o que talvez sea definido por el usuario en alguna entrada, o puede ser que nos toque poner más datos de los que esperábamos en dicho arreglo.
+
+Entonces **¿Como se omporta un puntero en este caso?**, quiero decir , no se va a apuntar a alguna variable en específico , sino que se lo hará directamente a un espacio de memoria donde se almacenarán los datos del arreglo.
+
+Para ello nos vamos aprovechar de la función *new data_type[]* incluida en la biblioteca **iostream**, esta instrucción nos permite reserva un espacio de memoria de acuerdo a su argumento, *new int[3]* reseva tres espacios de memoria de tipo entero. De acuerdo a ello:
+
+*Arreglo unidimensional*
+
+    int *arreglo = new int[n]; // reserva tres espacios de memoria de tipo entero
+
+    Para el compilador: arreglo = *
+
+            (*)----> [int, int, int, ....,int] // lo transporta a un espacio con 'n' cajas de memoria
+
+*Arreglo bidimensional*
+
+Pequeña varicación en la syntaxis: en (new data_type*[]) se coloca el asterisco antes de los corchetes para indicar que no se va areservar espacios para memoria, sino espacios para punteros
+
+    int **arreglo = new int*[m]; // fijate en los asteriscos 
+
+            (*)----> [*, *, *, ..., *] // lo transporta a un espacio con 'm' punteros
+
+Nótese que si se va de un portal a más portales, se debe agregar un asterísco extra por cada nivel que haya de suceder eso, en este caso , un puntero a un puntero a un puntero en solo una instancia.
+
+                    [*, *, *, ..., *]  // Ahora recorramos los espacios con un for
+                     0  1  2, ...,m-1    
+
+    for(int i=0; i < m, i++ )
+    {
+        arreglo[i] = new int[n]; // reserva 'n' espacios de memoria de tipo entero para cada pun
+    }
+
+Entonces:
+
+                    (*)
+                     |
+                     |----->[*]---->[int, int, int, ..., int]
+                     |----->[*]---->[int, int, int, ..., int]
+                     |----->[*]---->[int, int, int, ..., int]
+                     |
+                     |...
+                     |----->[*]---->[int, int, int, ..., int]
+
+Otro diagrama:
+
+                                         matriz (int**)
+                                                |
+                                --------------------------------
+                                |               |              |
+                            matriz[0]        matriz[1]      matriz[2]  ...  matriz[m-1]
+                              (int*)           (int*)         (int*)          (int*)
+                                |               |               |               
+                           [int,int,...]   [int,int,...]   [int,int,...]
+
+*Espera un momoento.... eso se parece a las ramas de un arbol*
+
+Nótese tamnbien que no he utilizado (&) todavía, pues no tengo una varibale en específico a la cual apuntar, solo tengo meros espacios de memorpia; aunque, ¿cómo los lleno?
+
+    // Para un arreglo unidimensional
+
+    int *arreglo = new int[n]
+    for(int i=0; i < n; i++)
+    {
+       arreglo[i] = 0; // o cualquier otro valor.
+    }
+
+Si quisiera que el arreglo se llene a lo *enum{}* se pondría i. O podría jugar con más punteros
+
+    int valor = 42;
+    int* pValor = &valor;
+
+    int* arreglo = new int[n];
+    for (int i = 0; i < n; i++) 
+    {
+        arreglo[i] = *pValor;  // tobogan de serpiente que conduce a valor (porque ahí marca el (&))
+    }
+
+Para llenar un arreglo bidimensional debemos recurrir a los típicos bucles anidados
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++) 
+        {
+            matriz[i][j] = 0 // o cualquier valor o fórmula que desees.
+        }
+    }
+
+**¿Que hay de una función o de un void con parametros?**
+
+    void procedimiento(int* nueva_variable)
+    {
+        nueva_variable = 6;
+    }
+    int main()
+    {
+        int valor = 5;
+        procedimiento(&valor);
+        return 0;
+    }
+
+¿Tendrá algo que ver con los *for* de tipo *auto*?
+
+    void procedimiento(int& ref) 
+    {
+        ref = 10;  // le das la potestar de acceder a valor, aunque necesariamente usas punteros
+    }
+    int main() 
+    {
+        int valor = 5;
+        procedimiento(valor);
+    }
 
