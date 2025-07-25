@@ -1078,7 +1078,7 @@ Antes ver como crear un archivo binario, primero practiquemos un poco el concept
             Mascota mascotita;   //Puedo anidar una estructura dentro de otra, en este caso mascota dentro de estudiante
         };
 
-Para llenar lass variables de una estructura:
+Para llenar las variables de una estructura:
 
         estudiante a1 = {1, 10, "Juan", {5, "Firulais"}}; 
 
@@ -1378,4 +1378,85 @@ Para llenar un arreglo bidimensional debemos recurrir a los típicos bucles anid
         int valor = 5;
         procedimiento(valor);
     }
+
+## Colas
+
+En esencia, las colas no son más que un conjunto de estructuras que se entrelazan entre si como si fueran los vagones de un tren o los diferentes eslavones de una cadenas, de ahí que se les relacione con la forma de una cola o fila, aunque este grupo de estructuras no forme necesariamente un arreglo.
+
+Vamos a partir de dos estructuras importantes : la cabeza y la cola y los eslaones de la cadena conocidos como los *nodos*. En la *cola*, se encuentra contenida la información que indican qué estructura va al inicio de la cadena y qué estructura va hacia al fondo de la cadena, mientras que el *nodo* como tal indica los contenidos de cada estructura contenida dentro de la cadena asi como también tiene que enlazar cada *nodo* para formar la cadena.
+
+    struct nodo
+    {
+        int dato;
+        nodo *siguiente;
+    }
+
+Lo más curioso de como está configurado el nodo es que el *siguiente* es un puntero que apunta a una estructura de tipo nodo, es como si se fuera a decir que el siguiente elemento de la cadena es un nodo, y así sucesivamente.
+
+    struct cola
+    {
+        nodo *delante;
+        nodo *atras;
+    }
+
+Tiene punteros que representan la cabeza y el final de la cola solo con punteros.
+
+A una estructura se le pueden encolar o agregar elementos mediante una función algoritmica de nombre *encolar* o *push*. Lamentablemente C++ no tiene una función que haga aquello de formar directa, por lo quue tendremos que crear un método que lo haga:
+
+    struct nodo
+    {
+        int dato;
+        nodo *siguiente;
+    };
+    struct cola
+    {
+        nodo *delante;
+        nodo *atras;
+    };
+
+    void encolar(cola &q, int valor)
+    {
+        nodo *aux = new nodo;
+        (*aux).dato = valor;
+        (*aux).siguiente = nullptr;
+        if (q.delante == nullptr)
+            q.delante = aux;
+        else
+            (*q.atras).siguiente = aux;
+        q.atras = aux;
+    }
+    int main(){ 
+        cola q;
+        q.delante = nullptr;
+        q.atras = nullptr;
+        encolar(q,1);
+        return 0;
+    }
+
+Lo que se ha hecho es utilizar un void que se encarga de recibir el nombre del puntero que vaya a referenciar a la cola y los datos que han de ser guardados en cada nodo de la cola. Nótese que cuando se crearon los nodos se los hizo apuntar a un valor nulo, esta es un buena práctica de programación para evitar problemas de memoria para "encerar el puntero en cuestión".
+
+Primero se crea un puntero auxiliar que apunta a un espacio de memoria reservado para una estrucutra de tipo nodo en la cual se van a guardar los datos de la cola, ahora ¿por qué es solo un espacio de memoria reservado? ¿No pude haber creado un nodo directamente (variable)? Lo cierto que si se hubiera hecho así, el nodo tendría que tener otro espacio de memoria dentro de su espacio de memoria para poder almacenar el puntero que apunta a la siguiente estructura de tipo nodo y entonces la optimización del programa se vería comprometida, por lo que es mejor aprovecharse de las ventajas que ofrecen los punteros para poder hacerlo de manera más eficiente.
+
+Otro aspecto a destacar es que aux se ha creado en forma de puntero, por lo que se debe hacer un pequeño cambio de sintaxis para acceder a las variables de la estructura de tipo nodo:
+
+    (*struct).dato = valor; 
+    struct -> dato = valor;
+
+Cualquiera de las dos formas son válidas para expresar que se están modificando las variables de una estructura que se ha creado en forma de puntero.
+
+Volviendo al funcionamiento del algoritmo, se hace que el puntero siguiente, guardado como una estructura de tipo nodo, apunte a un valor nulo para "encerarlo", el condicional if verifica si ya existe una cabeza para la cola:
+
+- **En caso de que si:** El contenido del auxiliar (que ya apuntaba a la memoria reservada para la estructura) queda enlazado con la cabeza,
+- **En caso contrario:** El puntero "**siguiente*" de la cola asignada se enlazará o apuntara al nuevo nodo (a todo el nodo) que ha sido creado en la memoria reservada.
+- **Al final:** El puntero que indica la cola apuntará o se enlaza con el nodo creado en la memoria reservada.
+
+En el caso de la primera interación, el puntero siguiente no apuntará a nada pues se le asigna un valor de null, y el nodo enlazado en cuestión actuaria de cabeza de la cola al mismo tiempo hasta introducirse otro elemento en la cola.
+En resumen:
+
+- Se crea un espacio.
+- Se lo llena.
+- Una parte del nodo anterior se dedicará a apuntar al nodo actual.
+- El nodo actual se convertirá en el nodo anterior de la siguiente interación.
+- Los nodos no son guardados en ninguna variable sino que se acceden a sus espacios de memoria por medio de punteros.
+- Las partes de los nodos que apuntan a otros nodos son datos del mismo tipo de estructura pero están configurados como punteros, lo que evita que se produzca una matriosca mortal.
 
