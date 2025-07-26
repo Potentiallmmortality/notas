@@ -1381,6 +1381,8 @@ Para llenar un arreglo bidimensional debemos recurrir a los típicos bucles anid
 
 ## Colas
 
+*first in , first out*, el primero que entra es el primero que sale.
+
 En esencia, las colas no son más que un conjunto de estructuras que se entrelazan entre si como si fueran los vagones de un tren o los diferentes eslavones de una cadenas, de ahí que se les relacione con la forma de una cola o fila, aunque este grupo de estructuras no forme necesariamente un arreglo.
 
 Vamos a partir de dos estructuras importantes : la cabeza y la cola y los eslaones de la cadena conocidos como los *nodos*. En la *cola*, se encuentra contenida la información que indican qué estructura va al inicio de la cadena y qué estructura va hacia al fondo de la cadena, mientras que el *nodo* como tal indica los contenidos de cada estructura contenida dentro de la cadena asi como también tiene que enlazar cada *nodo* para formar la cadena.
@@ -1433,6 +1435,8 @@ A una estructura se le pueden encolar o agregar elementos mediante una función 
         return 0;
     }
 
+### Encolar un elemento en una cola
+
 Lo que se ha hecho es utilizar un void que se encarga de recibir el nombre del puntero que vaya a referenciar a la cola y los datos que han de ser guardados en cada nodo de la cola. Nótese que cuando se crearon los nodos se los hizo apuntar a un valor nulo, esta es un buena práctica de programación para evitar problemas de memoria para "encerar el puntero en cuestión".
 
 Primero se crea un puntero auxiliar que apunta a un espacio de memoria reservado para una estrucutra de tipo nodo en la cual se van a guardar los datos de la cola, ahora ¿por qué es solo un espacio de memoria reservado? ¿No pude haber creado un nodo directamente (variable)? Lo cierto que si se hubiera hecho así, el nodo tendría que tener otro espacio de memoria dentro de su espacio de memoria para poder almacenar el puntero que apunta a la siguiente estructura de tipo nodo y entonces la optimización del programa se vería comprometida, por lo que es mejor aprovecharse de las ventajas que ofrecen los punteros para poder hacerlo de manera más eficiente.
@@ -1457,6 +1461,55 @@ En resumen:
 - Se lo llena.
 - Una parte del nodo anterior se dedicará a apuntar al nodo actual.
 - El nodo actual se convertirá en el nodo anterior de la siguiente interación.
+- Solo una "parte" del nodo actual ha de apuntar a todo el nodo siguiente.
 - Los nodos no son guardados en ninguna variable sino que se acceden a sus espacios de memoria por medio de punteros.
 - Las partes de los nodos que apuntan a otros nodos son datos del mismo tipo de estructura pero están configurados como punteros, lo que evita que se produzca una matriosca mortal.
+
+        [Delante]---siguiente--->[nodo]----->[nodo]---siguiente->[Atras]
+
+A diferencia de lo que yo creía al principio, el siguiente apunta al próximo nodo desde la cabeza hasta la cola, no desde la cola hasta la cabeza. Tenlo en cuenta para no confundirte
+
+### Mostrar un elemento Cola
+
+    void mostrarCola(cola &q)
+    {
+        nodo *aux = q.delante; // Primero apunta al nodo a la cabeza de la cola
+        while (aux != nullptr)    
+        {
+            cout << (*aux).dato << '\t'; // Imprime a lo que sea que se esté apuntando
+            aux = (*aux).siguiente;  // apunta al siguiente del nodo actual
+        }
+    }
+
+Lo que hace este método es recibir la estructura de la cola, ya sea como una copia local o como referencia mediante un &. Luego, se crea un puntero auxiliar de tipo nodo que apunta al nodo inicial (la cabeza) de la cola.
+
+A continuación, se ejecuta un bucle que continúa mientras el puntero auxiliar no sea nullptr (es decir, mientras haya nodos por recorrer). En cada iteración, se imprime el dato almacenado en el nodo actual al que apunta el puntero auxiliar, y luego el puntero avanza para apuntar al siguiente nodo en la cadena.
+
+De esta manera, se recorre toda la cola desde el frente hasta el final, mostrando los datos de cada nodo en orden.
+
+¿por qué aux es un puntero y no una variable? *aux* es un puntero y no una variable debido a que no puedes asignarle una variable en crudo a un conjunto de punteros que se apuntan entre si para llegar a una dirección de memoria, para seguir la red de punteros necesariamente el otro elemento que agregues debe ser otro puntero.
+
+¿por qué apunta a q.delante primero? *aux* apunta a q.delante porque es el primer nodo accesible, no puedes acceder a otro nodo que no sea la cabeza o el último de la cola para empezar a recorrerla utilizando el "apartado" de siguiente; por otro lado, no puedes empezar de la cola, porque el "apartado" siguiente intentaría acceder a un nodo que no existe y por ahora no existe un "apartado" para accder al anterior de la cola.
+
+Otra cosa, en este tipo de métodos siempre es conveniente usar un auxiliar, es como cuando utilizabamos un vector auxiliar en un bucle automatico para almacenar los datos de un vector y luego copiarlos a otro vector, pero en este caso , el auxiliar no es un vector sino una estructura puntero.
+
+### Desencolar un elemento de una cola
+
+En una cola, el primer elemento que se introduce es el primero que se puede sacar.
+
+    void desencolar(cola &q)
+    {
+        nodo *aux = q.delante;
+        int dato = (*aux).dato; // Guarda el dato del nodo que se va a eliminar
+        q.delante = (*q.delante).siguiente; // Mueve la cabeza de la cola al siguiente nodo
+        cout << "Desencolado: " << dato << endl;
+        delete aux; // Libera la memoria al que este apuntando aux,
+    }
+
+En el método:
+
+- Se recibe las estructura que contiene a los punteros de la cabeza y el fondo de la cola.
+- Se puede guardar la información del nodo a desencolar en una variable auxiliar.
+- El puntero de la cabeza de la cola apunta al siguiente puntero desde la cabeza de la cola.
+- Al puntero que ha sido descolado se le aplica el comando delete para liberar la memoria que estaba ocupando (se borra ese espacio de memoria).
 
