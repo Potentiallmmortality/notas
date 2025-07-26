@@ -34,6 +34,7 @@ void mostrarCola(cola &q)
 void desencolar(cola &q)
 {
     nodo *aux = q.delante;
+    q.delante = aux;
     int dato = (*aux).dato; // Guarda el dato del nodo que se va a eliminar
     q.delante = (*q.delante).siguiente; // Mueve la cabeza de la cola al siguiente nodo
     cout << "Desencolado: " << dato << endl;
@@ -48,6 +49,13 @@ int main(){
     encolar(q,3);
     mostrarCola(q);
     desencolar(q);
+    mostrarCola(q);
+    desencolar(q);
+    desencolar(q);
+    mostrarCola(q);
+    encolar(q,4);
+    encolar(q,5);
+    mostrarCola(q);
 
     return 0;
 }

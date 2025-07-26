@@ -167,7 +167,7 @@ Los diferentes puntos de control que crea GIT en tu proyecto se alojan a lo larg
 
 Pueden existir tantas branch como funcionalidades tenga el proyecto, algunas se encargarán de resolver problemas específicos como la aparición de errores críticos por medio de un "hotfix".
 
-- **git branch *nombre***: crea y nombra un branch a partir de la rama principal. *la rama será creada a partir del último commit guardado en la rama madre.* 
+- **git branch *nombre***: crea y nombra un branch a partir de la rama principal. *la rama será creada a partir del último commit guardado en la rama madre.*
 - **git switch *nombre_rama_objetivo***:cambiar la rama en la que te encuentras por la que indicas en el comando.
 - **git merge *rama_externa***: Une los elementos que tenga la rama mencionada (a partir de su último commit) en el comando con los elementos que tenga la rama en la que se encuentere en ese momento.
 
@@ -214,7 +214,7 @@ Creación de la llave *ssh*:
 
 El comando te avisara cuáles serán tus claves privadas y públicas.
 
-Ahora solo queda inciar el *ssh agent* 
+Ahora solo queda inciar el *ssh agent*
 
     eval "$(ssh-agent -s)"
 
@@ -224,12 +224,12 @@ para agregar tu *key* personal al equipo:
 
 Y por último tienes que agregar tu *key* pública a tu cuenta de github.
 
-Ahora solo tienes que iniciar tu nube con: *git remote add origin git@github.com:user/repositorio.git*
+Ahora solo tienes que iniciar tu nube con: *git remote add origin <git@github.com>:user/repositorio.git*
 ojo!!! debes crear tu repositorio en GITHUB primero.
 
     git remote add origin git@github.com:user/repositorio.git
 
-No olvides comprobar la conexión con la nube con: *ssh -T git@github.com*, si dice que estas correctamente autenticado estas del otro lado!!
+No olvides comprobar la conexión con la nube con: *ssh -T <git@github.com>*, si dice que estas correctamente autenticado estas del otro lado!!
 
     ssh -T git@github.com
 
@@ -255,7 +255,7 @@ Dentro de la programación estructurada se trabajarán con espacios de memoria l
 
 Para empezar a programar:
 
-Se necesita incluir la biblioteca que alamacena las funciones básicas a utilizar, llamar al bloque main ya sea por medio de void o un *tipo de dato* y en caso de usar algun tipo de dato se debe retornar un valor que concuerde con dicho tipo de dato al final del código; 
+Se necesita incluir la biblioteca que alamacena las funciones básicas a utilizar, llamar al bloque main ya sea por medio de void o un *tipo de dato* y en caso de usar algun tipo de dato se debe retornar un valor que concuerde con dicho tipo de dato al final del código;
 todo esto se hace con la finalidad de que el compilador sepa como leer el código que escribimos (*empieza a leer al identificar a main*).
 
 ![Empezando](img/hola_mundo.png)
@@ -288,7 +288,7 @@ De tal forma que se utilizarán las funciones: *printf ("")* y *scanf("%tip_dato
 
 - Empezamos por llamar a la librería: *#include "stdio.h"*
 - Llamamos a main:                    *int main ()*
-- Abrimos llaves y declaramos las variables necesarias: *{ float base=0; float altura=0; float area=0;float perimetro=0;* 
+- Abrimos llaves y declaramos las variables necesarias: *{ float base=0; float altura=0; float area=0;float perimetro=0;*
 - Las variables valdrán 0 en un inicio aunque se les asignará un valor más tarde, no olvides especificar que tipo de dato se guardará en una variable.
 - Mostramos los mensajes necesarios: *printf ("ingresa base")*; *printf ("ingresa altura")*; *printf ("el area es")*; *printf ("el perimetro es")*.
 - Escribimos los inputs: *scanf ("%f", &base)*; *sacnf ("%f", &altura)*.
@@ -314,7 +314,7 @@ Dentro de la programación, el refactorizar es un proceso de mejorar el código 
 
 Para entender mejor este concepto partimos de:
 
-![hw](img/hw.png) 
+![hw](img/hw.png)
 
 Podemos extraer la función "*printf*" por medio del atajo *Ctrl + Shift + R* y nombrarla como queramos aunque es preferible que el nombre sea un verbo en infintivo que describa la función al guardar:
 
@@ -414,7 +414,7 @@ while *condición*: //i<final
 
 **Resultado:**
 
-➕	➕	➕	➕	➕	➕
+➕ ➕ ➕ ➕ ➕ ➕
 
 2. Haga una serie de 10 elementos que alterne entre "*+*" y "*-*" empezando por "*+*".
 
@@ -435,11 +435,11 @@ Podemos notar que si empezamos por "*+*", a cada "*+*" le corresponde el número
 
 **Con una estructura alternativa:**
 
-![Ejercicio 2](img/e2f2.png)    
+![Ejercicio 2](img/e2f2.png)
 
 **Resultado:**
 
-➕	➖	➕	➖	➕	➖	➕	➖	➕ ➖
+➕ ➖ ➕ ➖ ➕ ➖ ➕ ➖ ➕ ➖
 
 3. Imprima una serie de Fibonacci en la consola, el número de elementos que tendrá la sucesión será definida por el usuario.
 
@@ -508,7 +508,7 @@ Si:
         return 0;
         }
 
-El bucle anidado se representaría: *(0, 0 1 2)\n; (1; 0 1 2)\n; (2; 0 1 2)\n*, tal que se tienen los siguientes **pares ordenados**: 
+El bucle anidado se representaría: *(0, 0 1 2)\n; (1; 0 1 2)\n; (2; 0 1 2)\n*, tal que se tienen los siguientes **pares ordenados**:
 
 ![Plano cartesiano](img/plano.svg)
 *Si esto no es algebra lineal, no se qué lo será*
@@ -629,10 +629,10 @@ Para empezar a resolver tenemos que armar nuestras matrices de estados y nuestro
     
 Para llenar la matriz de transiciones **δ = Q x Σ** debemos observar las cosencuencias de cada instrucción en cada mutación, por ejemplo:
 
--  δ0(q0,>)= q1
--  δ1(q1,b)= q3
--  δ3(q0,x)= q0
--  etc..
+- δ0(q0,>)= q1
+- δ1(q1,b)= q3
+- δ3(q0,x)= q0
+- etc..
 
 Una forma más facil de hacerlo sería mediante la siguiente tabla:
 
@@ -677,7 +677,7 @@ Para este caso se van a manejar los siguientes conjuntos:
     +[i]={'1','2','3',...n};
     *[i]={1,2,3,...m};
 
-**d**: Albergará el dominio del email a verificar. Al momento de programar el autómata lo podemos representar con un caracter especial ya que comparar un caracter con 
+**d**: Albergará el dominio del email a verificar. Al momento de programar el autómata lo podemos representar con un caracter especial ya que comparar un caracter con
 
     d={@dominio.com}
 
@@ -715,7 +715,7 @@ podemos interpretr algunas instrucciones instrucciones dadas:
 - **isdigit()**: Devueleve un valor de verdadero o falso para saber si una variable dada es entero.
 
 ### Algunas librerias y cosas nuevas (para C++)
-    
+
     #include "stdlib.h"
 Es necesaria para usar **atoi()**
 
@@ -774,7 +774,7 @@ Para representar a todos los personajes en una orilla podemos valernos de:
 - Mostrar la animación de la barca cruzando el río. Importante sber de cuántos carácteres de largo vamos a hacer al río.
         int riolong=20; //algún valor arbitrario para la longitud del río
 
- ##### Algunas carácterísticas de C++
+##### Algunas carácterísticas de C++
 
 - La manera de **importar librerías** en C cambia, ya no se utilizarán "" sino <> y en la mayoría de casos no será necesario poner la terminación *.h*.
 
@@ -798,8 +798,8 @@ Y estamos listos para continuar.
 
 *Lo nuevo*: el **&** despues de *string* indica que debe haber una asignación por defecto a los parametros con los que se trabaja en caso de que al usar la función haya parámetros insuficientes. Esta mecánica en *c++* es conocida como puntero:
 
-- Poner un **"True"** dentro de la condición de bucle hace que este se repita infinitas veces, de tal manera que se vuelva a pedir el valor de la variable al usuario hasta que el ciclo se rompa. 
-- El comando **cin.fail()** devuelve un valor booleano ("*true* o *false*") de acuerdo a si la variable se ha guardado y escaneado exitosamente; en este caso, si la variable se guarda correctamente (*cin.fail()* da falso) y se cumple con los rangos del número especificado se rompe el bucle mediante la palabra reservada **break** y se procede a devolver dicho valor. 
+- Poner un **"True"** dentro de la condición de bucle hace que este se repita infinitas veces, de tal manera que se vuelva a pedir el valor de la variable al usuario hasta que el ciclo se rompa.
+- El comando **cin.fail()** devuelve un valor booleano ("*true* o *false*") de acuerdo a si la variable se ha guardado y escaneado exitosamente; en este caso, si la variable se guarda correctamente (*cin.fail()* da falso) y se cumple con los rangos del número especificado se rompe el bucle mediante la palabra reservada **break** y se procede a devolver dicho valor.
 - Si el bucle se repite, necesariamente de debe hacer uso de **cin.clear()** y **cin.ignore()** para limpiar y encerar la variable de nuevo, para que vuelva a ser escaneada. *En pocas palabras, el bucle se repite infinitamente ante una tautología*.
 
 ![](img/puntero.png)
@@ -808,7 +808,6 @@ Y estamos listos para continuar.
 
 - El **(auto && p :)** puede usarse como un argumento para bucle, en este caso hace que en cada instancia de dicho bucle a la variable p se le de un puntero para escanear cada miembro individual del vector de strings recibido.  
 
- 
 #### Programación del acertijo por partes
 
 **Declaaración de Variables**: Declararemos las variables que necesitamos de forma global, fuera de cualquier bloque del archivo *.cpp* (serán válidas para todo ese archivo *.cpp*):
@@ -856,7 +855,7 @@ Y estamos listos para continuar.
 
 ## Manejo de las librerías **vector**, **string** y **fstream**
 
-### Vectores de strings, strings y carácteres.
+### Vectores de strings, strings y carácteres
 
 Anteriormente pudimos ver que gracias a la librería **string** podíamos guardar varios carácteres en un "arreglo" sin la limitación de indicar tamaños, aunque el uso de este tipo de datos puede traer confusión en conparación a los *arrays* tradicionales que se usaban antes en C, y es que se debe tener cuidado al momento de manejar los punteros e indexación de los strings para evitar errores de compilación.
 
@@ -935,7 +934,7 @@ Es una librería destinado al manejo de un flujo para la lectura y escritura de 
 - La palabra clave ifstream puede designar una acción (**file** en este caso) que podemos nombrar de manera personalizada y que actuara sobre un string que ha de llevar la ruta relativa de un archivo para abrir dicho archivo
 - La acción **getline(file,variable)** escanea la primera linea del archivo y lo guarda en una en la variable *line* en este caso.
 - Aprovechamos la acción de un bucle, en este caso al poner getline en su argumento hacemos que este se ajuste al numero de líneas del archivo.
-- Nos valemos de la instrucción **variable.push_back(lo que se quiera guardar)** para guardar cada linea *string* en el vector de strings *Arr* 
+- Nos valemos de la instrucción **variable.push_back(lo que se quiera guardar)** para guardar cada linea *string* en el vector de strings *Arr*
 
 ![](img/Tabla.png)
 
@@ -950,6 +949,7 @@ Esta vez el código es más complejo, pero a grandes rasgos puedo decir que busc
 ### ctype.h
 
 Hermosa Librería, te permite utilizar "*instrucciones*" como:
+
 | Función       | ¿Qué hace?                                                     | Ejemplo                |
 | ------------- | -------------------------------------------------------------- | ---------------------- |
 | `isdigit(c)`  | Devuelve `true` si `c` es un dígito (`0–9`)                    | `isdigit('3') → true`  |
@@ -981,7 +981,7 @@ Piesa un momento, ¿Qué tiene de diferente este método?
 
 El método que viste anteriormente es un bloque dedicado a calcular el factorial de un número dado, el factorial como operación matemática consta de multiplicar un número dado por su antecesor hasta llegar al uno.
 
-Para poder caluclar un factorial usalmente se usa un método recursivo. En el código mostrado anteriormente, la función se llama a si misma cuántas veces sean necesarias hasta llegar al 1. 
+Para poder caluclar un factorial usalmente se usa un método recursivo. En el código mostrado anteriormente, la función se llama a si misma cuántas veces sean necesarias hasta llegar al 1.
 
 Podemos usar la recursividad para hacer una cuenta regresiva de un número hasta el 1, por ejemplo:
 
@@ -1201,7 +1201,7 @@ Otro aspecto a destacar es que en cada instancia del bucle cada aspecto interno 
 Son estructuras que apuntan o refrencian a una sección específica de la memoria ram. Estos pueden actuar al momento de clarar una variable (*reserva un espacio*) y luego al asignarle un valor (*Reemplaza todo lo que tenga el espacio por este nuevo valor*). Si bien los punteros hasta el momento se encuentran de manera implícita en este proceso de ejemplo, tambien los puedo utilizar explicitamente:
         int a;
         int *p; //piensa en él como una flecha que apunta espacios de la ram destinados a almacenar datos de tipo int
-        char *c; //piensa en él como una flecha que apunta espacios de la ram destinados a alamacenar datos de tipo char
+        char*c; //piensa en él como una flecha que apunta espacios de la ram destinados a alamacenar datos de tipo char
 
         *p = &a; // el puntero p apunta a donde se guarda la variable a (busca la cajita donde se guarda 'a')
 
@@ -1218,12 +1218,12 @@ Ejemplo de como trabajan los punteros en un programa:
         using namespace std;
         int funcion(int valor) //parametro por "valor"
         {
-            valor += 5; // en valor: |__valor__| <--- valor + 5
+            valor += 5; // en valor: |**valor**| <--- valor + 5
             return valor;
         }
         void funcion_ref(int *valor) //parametro por "referencia"
         {
-            *valor += 5; //en num: |__valor__| <--- valor + 5
+            *valor += 5; //en num: |**valor**| <--- valor + 5
 
             // En este caso, valor le asigno la "Etiqueta" de num", si modifico a valor, modifico a num
             // sin necesidad de crear una copia
@@ -1255,7 +1255,7 @@ Se que es algo un poco contraintuitivo, en matemáticas por ejemplo aprendemos q
                    |              |
            [int]<--|              |-->[int]   // son dos espacios de memoria diferentes, solo comparten valor
 
-Quizás nos será conveniente pensar en la base de un puntero (*), como una especie de hipervínculo o portal que no ocupa lo mismo que una caja de memoria pero transporta al compilador a una caja de memória específica que será identificada por un (&). 
+Quizás nos será conveniente pensar en la base de un puntero (*), como una especie de hipervínculo o portal que no ocupa lo mismo que una caja de memoria pero transporta al compilador a una caja de memória específica que será identificada por un (&).
 
     *---->&
 
@@ -1265,11 +1265,53 @@ Quizás nos será conveniente pensar en la base de un puntero (*), como una espe
 
 Con esto consigo que las dos varibales se comporten como una sola ahorandome líneas de código y un espacio de memoria.
 
+#### Breve nota de un aprendiz de programación
+
+No es lo mismo una variable interactuando con otra variable o un puntero, que un puntero interactuando con una variable o un puntero con otro puntero.
+
+Si hago esto:
+
+    int a = 10;
+
+Lo podría pensar así:
+
+    [a] <--- 10;
+
+incluso si asigno un valor a un puntero, siempre y cuando este no apunte a la nada:
+
+    int a*;
+    *a = 10; [a] <--- 10;
+
+Pero cuando un puntero tiene que apuntar a algo lo hace por el lado contario:
+
+    int b;
+    int a* = &b;   [*a]---> [b]
+
+    int *b, *a;
+    *a = new int;  [a]---> [int]
+    *b = *a;      [*b]---> [*a]---> [int]
+
+Ojo!, en esos casos no funciona al reveés:
+
+    a* = *b       [*a]---> [*b]---> // b no estaba apuntando a nada en primer lugar
+
+Entonces:
+
+    int b;         [b]
+    int *a = &b    [*a] ---> [b]
+    *a = 3     <---[*a]<---[3]
+
+Tal que al final:
+
+    [3]--->[*a]--->[b]
+
+Teniendo esto en mente, por favor evita errores futuros...
+
 ### Arreglos Dinámicos
 
 Anteriormente aprendimos que los arreglos tienen una longitud fija, pero a veces necesitamos crear un arreglo cuyo tamaño no sabremos todavía o que talvez sea definido por el usuario en alguna entrada, o puede ser que nos toque poner más datos de los que esperábamos en dicho arreglo.
 
-Entonces **¿Como se omporta un puntero en este caso?**, quiero decir , no se va a apuntar a alguna variable en específico , sino que se lo hará directamente a un espacio de memoria donde se almacenarán los datos del arreglo.
+Entonces **¿Como se comporta un puntero en este caso?**, quiero decir , no se va a apuntar a alguna variable en específico , sino que se lo hará directamente a un espacio de memoria donde se almacenarán los datos del arreglo.
 
 Para ello nos vamos aprovechar de la función *new data_type[]* incluida en la biblioteca **iostream**, esta instrucción nos permite reserva un espacio de memoria de acuerdo a su argumento, *new int[3]* reseva tres espacios de memoria de tipo entero. De acuerdo a ello:
 
@@ -1381,7 +1423,7 @@ Para llenar un arreglo bidimensional debemos recurrir a los típicos bucles anid
 
 ## Colas
 
-*first in , first out*, el primero que entra es el primero que sale.
+*first in , first out* : El miembro de la cola que entra primero es el que sale primero, pero también, el miembro que se agrega se convierte en el último de la cola.
 
 En esencia, las colas no son más que un conjunto de estructuras que se entrelazan entre si como si fueran los vagones de un tren o los diferentes eslavones de una cadenas, de ahí que se les relacione con la forma de una cola o fila, aunque este grupo de estructuras no forme necesariamente un arreglo.
 
@@ -1465,9 +1507,8 @@ En resumen:
 - Los nodos no son guardados en ninguna variable sino que se acceden a sus espacios de memoria por medio de punteros.
 - Las partes de los nodos que apuntan a otros nodos son datos del mismo tipo de estructura pero están configurados como punteros, lo que evita que se produzca una matriosca mortal.
 
-        [Delante]---siguiente--->[nodo]----->[nodo]---siguiente->[Atras]
+        [Delante]---siguiente--->[nodo]---siguiente--->[nodo]---siguiente--->[Atras]--->seguir_agregando
 
-A diferencia de lo que yo creía al principio, el siguiente apunta al próximo nodo desde la cabeza hasta la cola, no desde la cola hasta la cabeza. Tenlo en cuenta para no confundirte
 
 ### Mostrar un elemento Cola
 
@@ -1495,8 +1536,7 @@ Otra cosa, en este tipo de métodos siempre es conveniente usar un auxiliar, es 
 
 ### Desencolar un elemento de una cola
 
-En una cola, el primer elemento que se introduce es el primero que se puede sacar.
-
+En una cola, el primer elemento que se introduce es el primero que se puede sacar (van saliendo desde la cabeza hasta la cola).
     void desencolar(cola &q)
     {
         nodo *aux = q.delante;
@@ -1512,4 +1552,189 @@ En el método:
 - Se puede guardar la información del nodo a desencolar en una variable auxiliar.
 - El puntero de la cabeza de la cola apunta al siguiente puntero desde la cabeza de la cola.
 - Al puntero que ha sido descolado se le aplica el comando delete para liberar la memoria que estaba ocupando (se borra ese espacio de memoria).
+- Podemos transformar el void a un int para devolver el dato que hemos desenlazado de la cola
 
+## Pilas
+
+Son similares a una cola ya que también tienen nodos enlazados entre si, pero para agregar un nuevo nodo y eliminarlo se rigen por una lógica diferente a la de las colas.
+
+- El sentido original de "siguiente" dentro de los nodos se sigue manteniendo (desde la cabeza hasta el fondo).
+- El miembro que se agrega a un pila se convierte en la cabeza de la pila.
+- Los miembros se van eliminando desde el fondo de la pila hasta la cabeza de la pila.
+
+        seguir_agregando--->[Delante]--->siguiente--->[nodo]---siguiente--->[Atras]--->null
+                |
+        Próximo "Delante"
+
+En la estructura para una pila podemos presindir del puntero atras, ya que este no hará nada, ya que todo elemento nuevo que se agregue a la pila se convertirá en la cabeza (delante), si queremos quitar un elemento de la pila se quitará la cabeza y si se quiere imprimir la información de la pila se hará desde la cabeza.
+
+Para crear una pila y agregar un nodo a dicha pila:
+
+    struct nodo // No voy a necesitar de una
+    {
+        int dato;
+        nodo *siguiente;
+    };
+    void push(nodo *&p, int dato)
+    {
+        nodo *auxiliar = new nodo;
+        (*auxiliar).dato = dato;
+        (*auxiliar).siguiente = p;
+        p = auxiliar;
+    }
+    int main(){
+        nodo *p = nullptr; // Puntero a la cabeza de la pila
+        push(p, 5);
+        push(p, 10);
+        push(p, 15);
+        return 0;
+    }
+
+Habíamos acordado que para manejar una pila solo necesitabamos de un puntero y no de una estructura de punteros; es importante que este puntero único este apuntando a *null* al incializarse. Entonces hay que considerar que cuando enviamos este puntero como parametro se lo debe recibir como un puntero junto con el '&' para poder modificarlo.
+
+En el método:
+
+- Se crea un nuevo nodo auxiliar que apunte a una dirección de memoria reservada.
+- Se llenan los datos en esa dirección de memoria resevada.
+- La sección "*siguiente" del espacio de memoria reservada apunta a al nodo puntero 'p'.
+- El puntero de nodo '*p*' apunta a la dirección de memoria reservada del nuevo nodo auxiliar de la interación actual.
+
+En la primera iteración, el puntero de la pila (p) no apunta a nada (nullptr), pero luego se redirecciona para apuntar al nuevo nodo creado dinámicamente. Ese nodo tiene su campo siguiente apuntando a lo que p apuntaba antes (es decir, a nullptr).
+
+Así, el nodo no se apunta a sí mismo, sino que su campo siguiente apunta a nullptr.
+
+En siguientes iteraciones, p ya apunta al nodo anterior, por lo tanto los nuevos nodos se van encadenando uno tras otro.
+
+### Mostrar una Pila
+
+    void mostrarPila(nodo *p)
+    {
+        while (p != nullptr)
+        {
+            cout << (*p).dato << '\t'; // Imprime el dato del nodo actual
+            p = (*p).siguiente;       // Mueve al siguiente nodo
+        }
+    }
+
+Hay que tener cuidado de no usar un '&' ya que estaríamos modificando donde apunta el puntero p directamente y nuestra pila se puede desconfigurar.
+
+En el método:
+
+- Nos ayudamos de un bucle while para recorrer la pila mientras el puntero de nodo 'p' no apunte a nullptr.
+- Imprimimos el dato al cual apunte el puntero de nodo 'p'.
+
+### Eliminar un Elemento de la Pila
+
+    void pop(nodo *&p)
+    {
+        nodo *aux = p;
+        int dato = (*aux).dato;
+        p = (*p).siguiente;
+        cout << "Desapilado: " << dato << endl;
+        delete aux;
+    }
+
+Funciona bajo la misma lógica que el método utilizado para descolar una cola.
+
+## Lista
+
+Es como una Pila, pero tienes la opción de manipular elementos al inicio y al final de esta.
+
+    #include <iostream>
+    using namespace std;
+    struct nodo
+    {
+        int dato;
+        nodo *siguiente;
+    };
+    void insertarInicio(nodo *&p, int dato) // Agregar una cabeza a la lista, misma lógica que una pila
+    {
+        nodo *auxiliar = new nodo;
+        (*auxiliar).dato = dato;
+        (*auxiliar).siguiente = p;
+        p = auxiliar;
+    }
+    void eliminarInicio(nodo *&p) // Misma lógica que una pila, eliminar la cabeza
+    {
+        if (p != nullptr)
+        {
+            nodo *auxiliar = p;
+            p = (*p).siguiente;
+            delete auxiliar;
+        }
+    }
+    void insertarFinal(nodo *&p, int dato) // Agregar un elemento al final de la lista
+    {
+        nodo *auxiliar = new nodo;
+        (*auxiliar).dato = dato;
+        (*auxiliar).siguiente = nullptr; // La cola apunta a nullptr
+        if (p == nullptr) // Si la lista está vacía, el nuevo nodo es la cabeza
+        {
+            p = auxiliar;
+        }
+        else
+        {
+            nodo *temp = p; // temp apunta a la "pila" formada
+            while ((*temp).siguiente != nullptr) // Recorre el bucle mientras el siguiente de la pila no sea nullptr, osea hasta el final
+            {
+                temp = (*temp).siguiente;
+            }
+            (*temp).siguiente = auxiliar; // Enlaza el nuevo nodo al final
+        }
+    }
+    void eliminarFinal(nodo *&p) // Eliminar el último elemento de la lista
+    {
+        if (p == nullptr) return;
+        nodo *aux = p;
+        if (p->siguiente == nullptr) 
+        {
+            delete p;
+            p = nullptr;
+            return;
+        }
+        while ((*aux).siguiente->siguiente != nullptr) // Recorre hasta el penúltimo nodo
+        {
+            aux = (*aux).siguiente;
+        }
+        delete (*aux).siguiente;
+        (*aux).siguiente = nullptr;
+    }
+    void insertar_enMedio(nodo *&p, int dato, int pos) 
+    {
+        nodo *aux = new nodo;
+        (*aux).dato = dato;
+
+        if (pos <= 1 || p == nullptr) {
+            (*aux).siguiente = p;
+            p = aux;
+            return;
+        }
+
+        nodo *temp = p;
+        for (int i = 1; i < pos - 1 && (*temp).siguiente != nullptr; i++) {
+            temp = (*temp).siguiente;
+        }
+
+        (*aux).siguiente = (*temp).siguiente;
+        (*temp).siguiente = aux;
+    }
+    void mostrarLista(nodo *p) // Misma lógica que una pila
+    {
+        while (p != nullptr)
+        {
+            cout << (*p).dato << '\t';
+            p = (*p).siguiente;       
+        }
+    }
+    int main(){
+        nodo *p = nullptr; // Creación de la lista 
+        insertarInicio(p, 5);
+        insertarFinal(p, 10);
+        insertar_enMedio(p, 7, 2);
+        eliminarInicio(p);
+        eliminarFinal(p);
+        mostrarLista(p);
+        return 0;
+    }
+
+Lo único que cambia aqui es la manera de insertar elementos en el medio y al final de la lista.
