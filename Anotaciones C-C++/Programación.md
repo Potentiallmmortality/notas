@@ -744,7 +744,7 @@ He aqui un ejemplo:
 
 # Anotaciones Segundo Bimestre
 
-< Desde aquí se empieza a ver C++
+< Desde aquí se empieza a ver C++>
 
 ## Ejercicios
 
@@ -1738,3 +1738,188 @@ Es como una Pila, pero tienes la opción de manipular elementos al inicio y al f
     }
 
 Lo único que cambia aqui es la manera de insertar elementos en el medio y al final de la lista.
+
+Recomendación: Las cabeceras encargadas de apuntar a los nodos deben apuntar a nullptr primero al momento de inicalizarlas
+
+## Árboles
+
+Es otras estructura de datos con nodos que se conectan entre si, aunque esta vez los nodos que la integra no se conectarán de manera lineal, sino que se conectarán de manera jerárquica. Considera un nodo con un dato, a parte este ha de tener dos punteros como en una cola, pero que no necesariamente mantienen un orden lineal, estos dos punteros por convención apuntan a la "derecha" e "izquierda" del nodo, teniendo cada nodo un valor y dos punteros que apuntan a los nodos hijos.
+
+              ┌───────┐
+              │  A    │       ← Raíz (nodo principal)
+              └──┬────┘
+                 │
+           ┌─────┴─────┐
+           ▼           ▼
+        ┌─────┐     ┌─────┐
+        │  B  │     │  C  │     ← Hijos del nodo A
+        └──┬──┘     └──┬──┘
+           │           │
+       ┌───┴───┐     ┌─┴────┐
+       ▼       ▼     ▼      ▼
+    ┌────┐  ┌────┐ ┌────┐ ┌────┐
+    │ D  │  │ E  │ │ F  │ │ G  │  ← Hojas (sin hijos)
+    └────┘  └────┘ └────┘ └────┘
+
+Como se puede observar, los nodos se conectan de manera jerárquica, es decir, cada nodo orgina a dos nodos hijos, más sin embargo no se da el caso que un nodo este conectado con el de al alado, por eso se dice que no es una estructura lineal de datos.
+
+### Arbol Binario de Busqueda (ABB)
+
+En esta estructura se guardarán datos de manera ordenada, de tal manera que que los elementos mayores a un nodo progenitor se ubiquen en el lado derecho del nodo, mientras que los elementos menores se ubiquen en el lado izquierdo a este. Es importante que cada elemento se almacena una sola vez en el arbol y por tanto no puede repetirse.
+
+#### Recorrido de un Arbol
+
+- En orden: Se visita primero al hijo de la izquierda, depsues al padre y por último al hijo de la derecha.
+- Pre orden: Primero al padre, luego al hijo izquierdo y por último al hijo derecho.
+- Post orden: Primero al hijo izquierdo, luego al hijo derecho y por último al padre.
+
+#### Crear un Arbol Binario de Busqueda
+
+Para crear un arbol, primero debemos de definir cada uno de los nodos que se integrarán en la estructura:
+
+    struct nodo
+    {
+        int num;
+        nodo *izquierda, *derecha;
+    };
+
+Por lo que se puede ver, se trata de una especie de "cabeza" que se integrará a la estructura, de hecho, es algo parecido a una cola pero no es necesariamente una cola (en primer lugar no es algo lineal). En una pila, la cabeza queda fijada al último elemento en agregarse, pero en un arbol el puntero debe ser capaza de recorrer todo el arbol y no solo su parte más lineal (linea de succeción directa) por lo que el puntero debe reiniciarse en cada interación a la punta del arból, recordemos que también debe recorrer el otro lado:
+
+    void insertar(nodo *&arbol, int num)
+    {
+        if ( arbol == nullptr ) 
+        {
+            arbol = new nodo;
+            (*arbol).num = num;
+            (*arbol).izquierda = nullptr;
+            (*arbol).derecha = nullptr;
+        }
+        else if ( num < (*arbol).num )
+            insertar((*arbol).izquierda, num);
+        else if ( num > (*arbol).num )
+            insertar((*arbol).derecha, num);
+    }
+
+En este comando nos ayudamos de la recursividad para que el puntero se reinicie en cada interación, ya que al terminar una interación todo vuelve a la normalidad; en cambio, si tratara de usar while de la siguiente manera:
+
+    void insertar(nodo *&arbol, int num)
+    {
+        while (arbol != nullptr)
+        {
+            if (num < arbol->num)
+                arbol = arbol->izquierda; // no utilizar este método pls
+            else if (num > arbol->num)
+                arbol = arbol->derecha;
+        }
+        arbol = new nodo;
+        arbol->num = num;
+        arbol->izquierda = nullptr;
+        arbol->derecha = nullptr;
+    }
+
+El nodo se guardaría correctammente, pero el puntero identificador quedaría fijado al elemento recien agregado, talvez necesitaría hallar una manera de hacerlo subir de nuevo a la punta mediante otro puntero especial o talvez sea conveniente utilizar un estructura de puntero auxiliar, por lo que la recursividad es la mejor opción para este caso.
+
+#### Recorrer un Arbol Binario de Busqueda
+
+Para estos casos es recomendable usar recursividad también; de hecho, en arboles en general es recomendable usar recursividad, ya que es la forma más fácil de recorrerlos sin tener problemas de punteros:
+
+     if ( arbol != nullptr )
+    {
+        preOrden((*arbol).izquierda);
+        preOrden((*arbol).derecha);
+    }
+
+Podemos ayudarnos del siguiente código para recorrer un arbol, lo único que hay que variar para imprimirlo en los diferentes oredenes es donde inserte el "*cout*"
+
+    void preOrden(nodo *arbol)
+    {
+        if ( arbol != nullptr )
+        {
+            cout << (*arbol).num << " ";
+            preOrden((*arbol).izquierda);
+            preOrden((*arbol).derecha);
+        }
+    }
+
+Imprime desde la cabeza hasta todos los de la izquierda, y luego los que estan a la derecha de todos a la izquierda.
+
+    void enOrden(nodo *arbol)
+    {
+        if (arbol != nullptr)
+        {
+            enOrden((*arbol).izquierda);
+            cout << (*arbol).num << " ";
+            enOrden((*arbol).derecha);
+        }
+    }
+
+Recorre todos los de la izquierda, luego los nombras hasta llegar a la cabeza y luego continua con los de la derecha.
+
+    void posOrden(nodo *arbol)
+    {
+        if (arbol != nullptr)
+        {
+            posOrden((*arbol).izquierda);
+            posOrden((*arbol).derecha);
+            cout << (*arbol).num << " ";
+        }
+    }
+
+Este recorre todos los de la izquierda y derecha, y luego los nombras.
+
+    void verArbol(nodo *arbol, int nivel)
+    {
+        if (arbol == nullptr)
+            return;
+        verArbol((*arbol).derecha, nivel + 1);
+        for (int i = 0; i < nivel; i++)
+            cout << "   ";
+        cout << (*arbol).num << endl;
+        verArbol((*arbol).izquierda, nivel + 1);
+    }
+
+Muestra la estructura completa del arbol, el bucle for imprime tantos espacios como nodos tenga la estructura para que se vea la estructura.
+
+## Try & Catch
+
+Son parte del manejo de excepciones en C++. Se usan para detectar y controlar errores o situaciones excepcionales durante la ejecución de un programa, sin que este se detenga abruptamente.
+
+    #include <iostream>
+    using namespace std;
+    enum {DIV_0 = 0,NEG};
+    int main(){
+        int a,b;
+        cout << "wenas" << endl
+             << "Ingresa dos numeros para dividirlos: " << endl
+             << "Numero 1: ";
+        try
+        {
+            cin >> a;
+
+            cout << "Numero 2: ";
+            cin >> b;
+            if (b == 0) 
+                throw (int)DIV_0;
+            else if (a < 0 && b > 0) 
+                throw (int)NEG;
+        }
+        catch(int e)
+        {
+            switch (e)
+            {
+            case DIV_0:
+                cout << "Error: No se puede dividir por cero" << endl;
+                break;
+            case NEG:
+                cout << "Error: El numero 1 es negativo y el número 2 es positivo" << endl;
+                break;
+            }
+        }
+        return 0;
+    }
+
+En try puedes poner lineas que normalmente tiendan a fallar como en los inputs por parte de los usuarios, cada vez que se detecte un comportamiento no deseado se tiene un condicional que lanza un valor, dicho valor será capturado por el catch y se ejecutará un switch correspondiente para checar dicho valor de error y decir de que error se trata.
+
+Con try & catch se puede evitar que el programa se detenga abruptamente en caso de que se produzca un error y se pueden personalizar los códigos de error para que se puedan manejar de manera más específica.
+
+Link al repo de las anotaciones: [https://github.com/Potentiallmmortality/notas.git](xd)
