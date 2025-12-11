@@ -1,0 +1,83 @@
+@startuml
+'https://plantuml.com/uml-diagram
+
+package stock
+{
+    class Curso
+    {
+        - Nombre: string
+        - CódigoÚnico: string
+        - CupoMáximo: int
+        - Instructor: Instructor
+        - Estudiantes: List<Estudiante>
+        - Estado: estadosCurso
+        + getters() / setters()
+        + constructor()
+
+    }
+    class Reserva
+    {
+        - Id: string
+        - Estudiante: Estudiante
+        - Curso: Curso
+        - Fecha: date
+        + getters() / setters()
+        + constructor()
+    }
+    enum estadosCurso
+    {
+        - Abierto
+        - Cerrado
+    }
+    enum estadosReserva
+    {
+        - Activa
+        - Cerrada
+    }
+}
+
+package Actores
+{
+    abstract class Persona
+    {
+        - Nombre: string
+        - DNI: string
+        - Email: string
+        - Fecha: Date
+        + getters() / setters()
+        + constructor()
+    }
+    class Estudiante
+    {
+        - Identifier: gui
+        - Contador: static int
+        - Cursos: List<Curso>
+        + getters() / setters()
+        + constructor()
+    }
+    class Instructor
+    {
+        - Identifier: gui
+        - Contador: static int
+        - Cursos: List<Cursos>
+        + getters() / setters()
+        + constructor()
+    }
+}
+
+
+Curso --> estadosCurso
+estadosReserva <-- Reserva
+'Reserva --> estadosReserva
+'estadosCurso <-- Curso
+Reserva o-- Estudiante
+Reserva o-- Instructor
+Reserva o-- Curso
+
+Estudiante o--o Curso
+Instructor o--o Curso
+
+Persona <|-- Estudiante
+Persona <|-- Instructor
+
+@enduml

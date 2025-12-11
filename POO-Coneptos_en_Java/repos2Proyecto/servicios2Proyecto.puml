@@ -1,0 +1,93 @@
+@startuml
+'https://plantuml.com/uml-diagram
+package ServiciosActores
+{
+ interface INegocio
+    {
+        + Agregar(T entidad): void
+        + Modificar(string parámetro, nuevosDatos): void
+        + Buscar(string parámetro): T
+        + Eliminar(string parámetro): T
+        + Listar(): void
+    }
+ class ServicioCursos
+    {
+        - RepositorioCursos: IRepositorioCursos
+        + ValidarCódigoÚnico(código): bool
+    }
+ class ServicioEstudiantes
+    {
+        - RepositorioEstudiantes: IRepositorioActores
+        + ValidarEmailÚnico(email): bool
+    }
+ class ServicioInstructores
+    {
+        - RepositorioInstructores: IRepositorioActores
+        + ValidarIdentificaciónUnica(id): bool
+    }
+}
+package ServiciosCompuestos
+{
+ class ServicioReservas
+ {
+     - RepositorioCursos: IRepositorioReservas
+     - ServicioCursos: ServicioCursos
+     - ServicioEstudiantes: ServicioEstudiantes
+     + CrearReserva(idEstudiante, códigoCurso, fecha): void
+     + CancelarReserva(idReserva): void
+     + ModificarReserva(idReserva, nuevosDatos): void
+     + BuscarReservasPorEstudiante(idEstudiante): List<Reserva>
+     + BuscarReservasPorCurso(códigoCurso): List<Reserva>
+     + ValidarCupoDisponible(códigoCurso): bool
+ }
+ class ServicioReporter
+ {
+     - RepositorioReservas: IRepositorioReservas
+     - RepositorioCursos: IRepositorioCursos
+     + GenerarReporteCursosPopulares(): List<Curso>
+     + GenerarReporteInstructoresSolicitados(): List<Instructor>
+     + GenerarReporteEstudiantesActivos(): List<Estudiante>
+     + ExportarReporteCSV(reporte, ruta): void
+ }
+}
+class Logger
+ {
+     - ArchivoLog: string = "log.txt"
+     + LogError(mensaje, excepción): void
+     + LogInfo(mensaje): void
+     + LogAdvertencia(mensaje): void
+     + LogDebug(mensaje): void
+ }
+' Servicios → Repositorios (Dependencias)
+
+interface IRepositorioCursos
+interface IRepositorioActores
+interface IRepositorioReservas
+
+' Servicios → Repositorios
+ServicioCursos --> IRepositorioCursos : usa >
+ServicioEstudiantes --> IRepositorioActores: usa >
+ServicioReservas --> IRepositorioReservas : usa >
+ServicioInstructores --> IRepositorioActores : usa >
+ServicioReporter --> IRepositorioReservas : usa >
+ServicioReporter --> IRepositorioCursos : usa >
+
+' ServicioReservas → otros servicios
+ServicioReservas --> ServicioCursos : consulta >
+ServicioReservas --> ServicioEstudiantes : consulta >
+
+' Logger usado transversalmente (opcional)
+ServicioCursos --> Logger : log >
+ServicioEstudiantes --> Logger : log >
+ServicioReservas --> Logger : log >
+ServicioInstructores --> Logger : log >
+ServicioReporter --> Logger : log >
+
+' Implementación de interfaz común
+
+INegocio <|.. ServicioEstudiantes
+INegocio <|.. ServicioInstructores
+INegocio <|.. ServicioCursos
+
+
+@enduml

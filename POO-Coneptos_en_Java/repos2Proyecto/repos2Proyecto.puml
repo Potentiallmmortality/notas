@@ -1,0 +1,90 @@
+|@startuml
+'https://plantuml.com/uml-diagram
+
+'primeros mostramos un caso sin cumplirlos principios SOLID
+'
+left to right direction
+skinparam dpi 200
+skinparam classAttributeIconSize 0
+
+package "Interfaces"{
+    interface IRepCursos
+    {
+        + Guardar(T Entidad): void
+        + ObtenerTodos(): List<T>
+        + BuscarPorCódigo(string código): Curso
+        + Eliminar(T Entidad): void
+    }
+    interface IRepActores
+    {
+        + Guardar(T Entidad): void
+        + ObtenerTodos(): List<T>
+        + BuscarPorId(string id)): T
+        + Eliminar(T Entidad): void
+    }
+    interface IRepReservas
+    {
+        + Guardar(T Entidad): void
+        + Eliminar(T Entidad): void
+        + ObtenerTodos(): List<T>
+        + BuscarPorCurso(string códigoCurso): List<Reserva>
+        + BuscarPorEstudiante(string idEstudiante): List<Reserva>
+        + ObtenerReservasActivas(): List<Reserva>
+    }
+}
+package "Repositorios" {
+    abstract class RepBase
+    {
+        - Filename: string
+        - Datos: List<T>
+        - Cargado: bool
+        + Cargar(): void
+        + GuardarDatos(): void
+    }
+    class RepEstudiantes
+    {
+        + getters() / setters()
+        + constructor()
+    }
+    class RepInstructores
+    {
+        + getters() / setters()
+        + constructor()
+    }
+    class RepCursos
+    {
+        + getters() / setters()
+        + constructor()
+    }
+    class RepReservas
+    {
+        + getters() / setters()
+        + constructor()
+    }
+}
+
+
+
+IRepActores <|.. RepEstudiantes
+
+
+
+IRepActores <|.. RepInstructores
+
+
+
+IRepCursos <|.. RepCursos
+
+IRepReservas <|.. RepReservas
+
+'RepBase <|-- RepCursos
+'RepBase <|-- RepInstructores
+'RepBase <|-- RepEstudiantes
+'RepBase <|-- RepReservas
+
+RepReservas --|> RepBase
+RepInstructores --|> RepBase
+RepEstudiantes --|> RepBase
+RepCursos --|> RepBase
+
+@enduml
